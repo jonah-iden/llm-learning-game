@@ -1,0 +1,104 @@
+body {
+  margin: 0;
+
+  --area-padding: 10px;
+}
+
+.app {
+  height: 100vh;
+  display: flex;
+}
+
+.mainArea {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.toolsArea {
+  padding: var(--area-padding);
+  border-left: 1px solid black;
+}
+
+
+/* Question Area */
+
+.questionArea {
+  padding: var(--area-padding);
+  border-top: 1px solid black;
+}
+
+.userInput {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.dropArea {
+  display: flex;
+  align-items: center;
+  padding: 0 5px;
+  width: calc(100% - 20px);
+  margin: 10px;
+  height: 40px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+/* Dataset Area */
+.datasetArea {
+  padding: var(--area-padding);
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.question,.answer {
+  display: flex;
+  align-items: center;
+}
+
+.dataEntry {
+  margin-bottom: 10px;
+}
+
+.token {
+  display: inline-block;
+  padding: 5px;
+  border: 1px solid transparent;
+}
+.token:hover {
+  border-color: black;
+  cursor: pointer;
+}
+.token.active {
+  border-color: blue;
+  font-weight: bold;
+  background-color: rgba(0, 123, 255, 0.1);
+}
+
+.tokenShape {
+  width: 28px;
+  height: 28px;
+  margin: 0 2px;
+  padding: 2px;
+  vertical-align: middle;
+}
+
+.tokenShape:hover {
+  cursor: pointer;
+}
+
+.tokenShape polygon {
+  fill: currentColor;
+  stroke-width: 6;
+  transition: stroke 120ms ease;
+}
+
+.tokenShape:hover polygon {
+  stroke: black;
+}
+
+.tokenShape.active polygon {
+  stroke: blue;
+  stroke-width: 8;
+}
