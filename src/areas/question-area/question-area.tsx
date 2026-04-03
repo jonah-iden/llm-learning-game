@@ -6,10 +6,7 @@ import { useDroppable } from "@dnd-kit/react";
 import { useUIStore } from "../../store/ui-store";
 
 export function QuestionArea({dataset}: {dataset: Dataset}) {
-  const [currentQuestion, setCurrentQuestion] = useState<string>(dataset.questions[0]);
-
-  const { setIsRevealed, answers } = useUIStore();
-
+  const { toggleRevealed, isRevealed, answers, questionIndex, setQuestionIndex } = useUIStore();
 
 
   const { ref } = useDroppable({
@@ -19,16 +16,32 @@ export function QuestionArea({dataset}: {dataset: Dataset}) {
 
   return (
     <div className="questionArea">
-      <button onClick={() => setIsRevealed(true)}>Reveal Answer</button>
-      <span className="question">Q: <TokenizedString tokens={tokenize(currentQuestion, dataset.knownTokens)} /></span>
-      <div className="userInput" >
-        A:
-        <div className="dropArea" ref={ref}>
-          {answers[0]?.map((token, index) => (
-            <TokenizedString key={index} tokens={[token]} />
-          ))}
+      {questionIndex > 0 && <button 
+      className="changeQuestionButton" 
+      onClick={() => setQuestionIndex(questionIndex - 1)}>
+        {"<"}
+        </button>}
+      {questionIndex < dataset.questions.length ? <div className="questionContainer">
+        <span className="question">Q: <TokenizedString tokens={
+          tokenize(dataset.questions[questionIndex], dataset.knownTokens)} />
+        </span>
+        <div className="userInput" >
+          A:
+          <div className="dropArea" ref={ref}>
+            {answers[questionIndex]?.map((token, index) => (
+              <TokenizedString key={index} tokens={[token]} />
+            ))}
+          </div>
         </div>
-      </div>
+      </div> : <div className="questionContainer">
+        <div>Done!</div>
+        <button onClick={() => toggleRevealed()}> {isRevealed ? "Hide Answers" : "Reveal Answers"}</button>
+        </div>}
+      {questionIndex < dataset.questions.length && <button 
+        className="changeQuestionButton" 
+        onClick={() => setQuestionIndex(questionIndex + 1)}>
+        {">"}
+        </button>}
     </div>
   );
 }

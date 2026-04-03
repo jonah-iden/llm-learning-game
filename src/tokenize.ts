@@ -15,6 +15,5 @@ export const tokenize = (text: string, knownTokens: Record<string, TokenData>): 
         wordType: knownTokens[word.toLowerCase()]?.type || "other",
         dimensions: knownTokens[word.toLowerCase()]?.dimensions || undefined
     }));
-    console.log("Tokenized:", tokens);
     return tokens;
 }

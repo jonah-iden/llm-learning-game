@@ -15,17 +15,22 @@ body {
   flex-direction: column;
 }
 
-.toolsArea {
-  padding: var(--area-padding);
-  border-left: 1px solid black;
-}
-
-
 /* Question Area */
 
 .questionArea {
   padding: var(--area-padding);
   border-top: 1px solid black;
+  display: flex;
+  align-items: center;
+}
+
+.questionContainer{
+  flex-grow: 1;
+  margin: 0 10px;
+}
+
+.changeQuestionButton {
+  height: 100%;
 }
 
 .userInput {
@@ -101,4 +106,23 @@ body {
 .tokenShape.active polygon {
   stroke: blue;
   stroke-width: 8;
+}
+
+/** Tools Area */
+
+.toolsArea {
+  padding: var(--area-padding);
+  border-left: 1px solid black;
+
+  h3 {
+    margin: 0;
+  };
+
+  p {
+    margin: 0;
+  };
+
+  h4 {
+    margin: 5px 0;
+  }
 }

@@ -1,45 +1,104 @@
 
+import { Token as TokenView } from "../../components/tokenized-string";
+import { Dataset, TokenData } from "../../datasets/types";
 import { useUIStore } from "../../store/ui-store";
+import type { Token } from "../../tokenize";
 
-export function ToolsArea() {
+export function ToolsArea({ dataset }: { dataset: Dataset }) {
   const { activeToken, setActiveToken, activeTool, setActiveTool } = useUIStore();
 
   return (
     <div className="toolsArea">
       <div style={{ marginBottom: "16px" }}>
         <h3>Active Token</h3>
-        {activeToken ? (
+        {activeToken ? (<>
+          <TokenView token={activeToken} />
+          <h3>Most Simliar</h3>
           <div>
-            <p><strong>{activeToken.realText}</strong></p>
-            <p>Type: {activeToken.wordType}</p>
-            <button onClick={() => setActiveToken(null)}>Clear</button>
+            {findNeighbors(activeToken.realText, dataset.knownTokens).map((token, index) => (
+              <TokenView key={index} token={token} />
+            ))}
           </div>
+          <h3>Most Likely Next</h3>
+          <div>
+            {getMostLikelyNext(activeToken.realText, dataset).map((res, index) => (
+              <div>
+                <TokenView key={index} token={res.token} /> ({(res.chance * 100).toFixed(2)}%)
+              </div>
+            ))}
+          </div>
+        </>
         ) : (
           <p>None selected</p>
         )}
-      </div>
 
-      <div>
-        <h3>Tools</h3>
-        <div style={{ display: "flex", gap: "8px", flexDirection: "column" }}>
-          {["label", "highlight", "group"].map((tool) => (
-            <button
-              key={tool}
-              onClick={() => setActiveTool(activeTool === tool ? null : tool)}
-              style={{
-                padding: "8px",
-                backgroundColor: activeTool === tool ? "#007bff" : "#f0f0f0",
-                color: activeTool === tool ? "white" : "black",
-                border: "1px solid #ccc",
-                cursor: "pointer",
-                borderRadius: "4px",
-              }}
-            >
-              {tool}
-            </button>
-          ))}
-        </div>
+
+
       </div>
     </div>
   );
 }
+
+function getDistance(vA: number[], vB: number[]): number {
+  return Math.sqrt(
+    Math.pow(vA[0] - vB[0], 2) +
+    Math.pow(vA[1] - vB[1], 2) +
+    Math.pow(vA[2] - vB[2], 2)
+  );
+};
+
+// Find the closest words to the one clicked
+function findNeighbors(targetWord: string, library: Record<string, TokenData>): Token[] {
+  targetWord = targetWord.toLowerCase();
+  return Object.keys(library)
+    .filter(w => w !== targetWord)
+    .sort((a, b) => {
+
+      return getDistance(library[targetWord].dimensions, library[a].dimensions) -
+        getDistance(library[targetWord].dimensions, library[b].dimensions);
+    })
+    .map(word => ({
+      realText: word,
+      wordType: library[word].type || "other",
+      dimensions: library[word].dimensions
+    }))
+    .slice(0, 3); // Return top 3 closest
+};
+
+let allDataCache: string[];
+
+function getMostLikelyNext(targetWord: string, dataset: Dataset): {token: Token, chance: number}[] {
+  const allData = allDataCache ?? [...dataset.questions, ...dataset.data
+    .map(d => d.question + " " + d.answer)]
+    .map(s => s.replace(/[^\w\s]|_/g, ""));
+
+  allDataCache = allData;
+
+  const nextWords = {} as Record<string, number>;
+
+  allData.forEach(text => {
+    const tokens = text.split(/\s+/);
+    tokens.forEach((token, index) => {
+      if (token.toLowerCase() === targetWord.toLowerCase() && index < tokens.length - 1) {
+        const nextWord = tokens[index + 1].toLowerCase();
+        nextWords[nextWord] = (nextWords[nextWord] || 0) + 1;
+      }
+    });
+  });
+
+  const numberOfNextTokens = Object.values(nextWords).reduce((a, b) => a + b, 0);
+
+
+  return Object.keys(nextWords)
+    .sort((a, b) => nextWords[b] - nextWords[a])
+    .map((word, i, words) => ({
+      token: {
+        realText: word,
+        wordType: dataset.knownTokens[word]?.type || "other",
+        dimensions: dataset.knownTokens[word]?.dimensions || undefined
+      },
+      chance: nextWords[word] / numberOfNextTokens
+    }))
+    .slice(0, 3); // Return top 3 most likely next words
+}
+

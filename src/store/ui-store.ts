@@ -7,9 +7,11 @@ interface UIState {
     activeTool: string | null;
     setActiveTool: (tool: string | null) => void;
     answers: Record<number, Token[]>;
-    setAnswer: (questionIndex: number, answer: Token[]) => void;
+    updateCurrentAnswer: (answer: Token) => void;
     isRevealed: boolean;
-    setIsRevealed: (isRevealed: boolean) => void;
+    toggleRevealed: () => void;
+    questionIndex: number;
+    setQuestionIndex: (index: number) => void;
 }
 
 export const useUIStore = create<UIState>((set) => ({
@@ -18,12 +20,17 @@ export const useUIStore = create<UIState>((set) => ({
     activeTool: null,
     setActiveTool: (tool) => set({ activeTool: tool }),
     answers: {},
-    setAnswer: (questionIndex, answer) => set((state) => ({
-        answers: {
-            ...state.answers,
-            [questionIndex]: answer,
-        },
-    })),
+    updateCurrentAnswer: (token) => set(state => {
+        const currentAnswer = state.answers[state.questionIndex] || [];
+        return {
+            answers: {
+                ...state.answers,
+                [state.questionIndex]: [...currentAnswer, token]
+            }
+        };
+    }),
     isRevealed: false,
-    setIsRevealed: (isRevealed) => set({ isRevealed }),
+    toggleRevealed: () => set(state => ({ isRevealed: !state.isRevealed })),
+    questionIndex: 0,
+    setQuestionIndex: (index) => set({ questionIndex: index }),
 }));
