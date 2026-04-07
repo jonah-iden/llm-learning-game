@@ -36,8 +36,8 @@ export function QuestionArea({dataset}: {dataset: Dataset}) {
             ))}
           </div>
         </div>
-      </div> : <div className="questionContainer">
-        <div>Done!</div>
+      </div> : <div className="questionContainer done">
+        <h3>Done!</h3>
         <button onClick={() => toggleRevealed()}> {isRevealed ? "Hide Answers" : "Reveal Answers"}</button>
         </div>}
       {questionIndex < dataset.questions.length && <button 
