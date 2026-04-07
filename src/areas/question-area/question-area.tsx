@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Dataset } from "../../datasets/types";
 import { Token, tokenize } from "../../tokenize";
 import { TokenizedString } from "../../components/tokenized-string";
@@ -14,6 +14,10 @@ export function QuestionArea({dataset}: {dataset: Dataset}) {
     accept: "token",
   })
 
+  const tokens = useMemo(() => 
+    tokenize(dataset.questions[questionIndex], dataset.knownTokens), 
+  [dataset.questions, questionIndex, dataset.knownTokens]);
+
   return (
     <div className="questionArea">
       {questionIndex > 0 && <button 
@@ -22,8 +26,7 @@ export function QuestionArea({dataset}: {dataset: Dataset}) {
         {"<"}
         </button>}
       {questionIndex < dataset.questions.length ? <div className="questionContainer">
-        <span className="question">Q: <TokenizedString tokens={
-          tokenize(dataset.questions[questionIndex], dataset.knownTokens)} />
+        <span className="question">Q: <TokenizedString tokens={tokens}/>
         </span>
         <div className="userInput" >
           A:

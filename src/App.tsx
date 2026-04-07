@@ -6,20 +6,26 @@ import { DragDropProvider } from "@dnd-kit/react";
 import {AutoScroller} from '@dnd-kit/dom';
 import { useUIStore } from "./store/ui-store";
 import { Token } from "./tokenize";
+import { useCallback } from "react";
 
 const dataset = GameWikiDataset;
 
 function App() {
-  const { updateCurrentAnswer } = useUIStore();
-
+  const { updateCurrentAnswer, removeAnswerToken, answers, questionIndex } = useUIStore();
 
   return (
     <DragDropProvider
-      plugins={(defaults) =>defaults.filter(plugin => plugin !== AutoScroller)}
+      plugins={(defaults) => defaults.filter(plugin => plugin !== AutoScroller)}
       onDragEnd={e => {
         const token = e.operation.source?.data as Token
-        if (!e.canceled && token && e.operation.target?.id === 'answer-drop-area') {
-          updateCurrentAnswer(token);
+        if(!e.canceled && token) {
+          const isInAnswer = answers[questionIndex]?.includes(token)
+          if (e.operation.target?.id === 'answer-drop-area' && !isInAnswer) {
+            updateCurrentAnswer(token);
+          } else if (isInAnswer && e.operation.target?.id !== 'answer-drop-area') {
+            removeAnswerToken(token);
+            e.suspend().abort();
+          }
         }
       }}
       >

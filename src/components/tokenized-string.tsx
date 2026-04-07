@@ -1,6 +1,7 @@
 import { useUIStore } from "../store/ui-store";
 import { useDraggable } from "@dnd-kit/react";
 import type { Token } from "../tokenize";
+import { useCallback, useId } from "react";
 
 function getSides(wordType: string): number {
   switch (wordType) {
@@ -32,7 +33,7 @@ function getPolygonPoints(sides: number): string {
 }
 
 
-export function TokenizedString({tokens}: {tokens: Token[]}) {
+export function TokenizedString({ tokens }: { tokens: Token[] }) {
   const { activeToken, setActiveToken, isRevealed } = useUIStore();
 
   const handleTokenClick = (token: Token) => {
@@ -49,7 +50,7 @@ export function TokenizedString({tokens}: {tokens: Token[]}) {
             <Token key={index} token={token} />
           );
         }
-        
+
         const isActive = activeToken === token;
         return <span key={index} className={`token ${isActive ? "active" : ""}`} onClick={() => handleTokenClick(token)}>{token.realText}</span>
       })}
@@ -57,35 +58,39 @@ export function TokenizedString({tokens}: {tokens: Token[]}) {
   );
 }
 
-export function Token({token}: {token: Token}) {
+export function Token({ token }: { token: Token }) {
   const { activeToken, setActiveToken } = useUIStore();
+  const id = useId();
 
-  const handleTokenClick = (token: Token) => {
+  const handleTokenClick = useCallback((token: Token) => {
     setActiveToken(token);
-  };
+  }, [setActiveToken]);
 
-  const {ref} = useDraggable({
-    id: `${token.realText}-${crypto.randomUUID()}`,
+  const { ref } = useDraggable({
+    id: `${token.realText}-${id}`,
     data: token,
     type: "token",
 
-  })
+  });
 
-  
   const isActive = activeToken?.realText === token.realText;
-  const [h, s, l] = token.dimensions;
+  const [h, rot, scale] = token.dimensions;
   const sides = getSides(token.wordType);
 
-  return <svg
-              ref={ref}
-              viewBox="0 0 100 100"
-              style={{ color: `hsl(${h * 360}, ${s * 100}%, ${l * 100}%)` }}
-              className={`token tokenShape ${isActive ? "active" : ""}`}
-              onClick={() => handleTokenClick(token)}
-              aria-label={token.realText}
-              id={crypto.randomUUID()}
-            >
-              <polygon points={getPolygonPoints(sides)} stroke="black"/>
-            </svg>
+  return (
+    <div ref={ref}
+      onClick={() => handleTokenClick(token)}
+      className={`token ${isActive ? "active" : ""}`}>
+      <svg
+        viewBox="0 0 100 100"
+        style={{ color: `hsl(${h * 180}, 100%, 50%)`, transform: `rotate(${rot * 360}deg) scale(${scale + 0.4})` }}
+        className={`tokenShape ${isActive ? "active" : ""}`}
+        aria-label={token.realText}
+        id={id}
+      >
+        <polygon points={getPolygonPoints(sides)} stroke="black" />
+        <circle cx="50" cy="10" r="10" fill="black" />
+      </svg>
+    </div>)
 
 }

@@ -1,29 +1,5 @@
 import { Dataset } from "./types";
 
-export const testDataset: Dataset = {
-    data: [
-        {
-            question: "What is the capital of France?",
-            answer: "The capital of France is Paris."
-        },
-        {
-            question: "What is the largest mammal?",
-            answer: "The largest mammal is the blue whale."
-        },
-        {
-            question: "Who wrote 'To Kill a Mockingbird'?",
-            answer: "'To Kill a Mockingbird' was written by Harper Lee."
-        }
-    ],
-    questions: [
-        "Where is Paris located?",
-        "Some Other test question?",
-    ],
-    knownTokens: {
-        "What": { dimensions: [1, 0, 0], type: "other" },
-    }
-}
-
 export const GameWikiDataset: Dataset = {
     // The "Training Data" for the student to analyze
     data: [
@@ -44,37 +20,42 @@ export const GameWikiDataset: Dataset = {
         "Where is the Desert?"         // Targeted Guessing: Everything so far is "North"
     ],
 
-    // Vector definitions for the visual shapes
-    // vector dimensions are: [Solidity, Sentiment, Energy]
+    // Shared semantic space for all token types.
+    // [0] concreteness: abstract -> physical
+    // [1] domain: social/character -> world/location
+    // [2] valence: negative/harmful -> positive/helpful
     knownTokens: {
-        "wood":      { type: "noun", dimensions: [0.9, 0.5, 0.2] }, // Solid, Neutral, Low Energy
-        "diamond":   { type: "noun", dimensions: [1.0, 0.8, 0.9] }, // Very Solid, Positive, High Energy
-        "stick":     { type: "noun", dimensions: [0.7, 0.5, 0.1] },
-        "sword":     { type: "noun", dimensions: [0.9, 0.4, 0.7] },
-        "guard":     { type: "noun", dimensions: [0.8, 0.6, 0.8] },
-        "merchant":  { type: "noun", dimensions: [0.8, 0.4, 0.5] },
-        "shopkeeper":{ type: "noun", dimensions: [0.8, 0.4, 0.4] }, // Very close to Merchant
-        "pickaxe":   { type: "noun", dimensions: [0.9, 0.6, 0.6] },
-        "axe":       { type: "noun", dimensions: [0.9, 0.4, 0.6] },
-        "shovel":    { type: "noun", dimensions: [0.9, 0.2, 0.6] },
-        "strong":    { type: "adj",  dimensions: [0.3, 0.9, 0.9] }, // High Sentiment/Energy
-        "greedy":    { type: "adj",  dimensions: [0.3, 0.1, 0.6] }, // Low Sentiment
-        "north":     { type: "other",dimensions: [0.0, 0.5, 0.3] },
-        "forest":    { type: "noun", dimensions: [0.6, 0.8, 0.4] },
-        "desert":    { type: "noun", dimensions: [0.6, 0.3, 0.8] }, // Opposite sentiment to Forest
-        "jungle":    { type: "noun", dimensions: [0.6, 0.7, 0.5] }, // Similar to Forest
-        "sentry":    { type: "noun", dimensions: [0.8, 0.6, 0.7] }, // Similar to Guard
-        "combine":   { type: "verb", dimensions: [0.05, 0.5, 0.5] }, // Abstract, Neutral
-        "craft":     { type: "verb", dimensions: [0.1, 0.5, 0.5] }, // Very similiar to Combine
-        "describe": { type: "verb", dimensions: [0.1, 0.5, 0.5] },
+        "wood":       { type: "noun", dimensions: [0.95, 0.35, 0.55] },
+        "diamond":    { type: "noun", dimensions: [0.98, 0.30, 0.80] },
+        "stick":      { type: "noun", dimensions: [0.90, 0.35, 0.52] },
+        "sword":      { type: "noun", dimensions: [0.92, 0.32, 0.40] },
+        "pickaxe":    { type: "noun", dimensions: [0.93, 0.32, 0.50] },
+        "axe":        { type: "noun", dimensions: [0.93, 0.32, 0.48] },
+        "shovel":     { type: "noun", dimensions: [0.92, 0.33, 0.54] },
 
-        // helper words. Maybe need another dimension or work differently
-        "how": { type: "other", dimensions: [0.0, 0.5, 0.5] },
-        "to": { type: "other", dimensions: [0.0, 0.5, 0.5] },
-        "where": { type: "other", dimensions: [0.0, 0.5, 0.5] },
-        "is": { type: "other", dimensions: [0.0, 0.5, 0.5] },
-        "the": { type: "other", dimensions: [0.0, 0.5, 0.5] },
-        "very": { type: "other", dimensions: [0.0, 0.5, 0.5] },
-        "and": { type: "other", dimensions: [0.0, 0.5, 0.5] },
+        "guard":      { type: "noun", dimensions: [0.80, 0.12, 0.65] },
+        "sentry":     { type: "noun", dimensions: [0.80, 0.13, 0.66] },
+        "merchant":   { type: "noun", dimensions: [0.72, 0.18, 0.52] },
+        "shopkeeper": { type: "noun", dimensions: [0.72, 0.18, 0.53] },
+
+        "north":      { type: "noun", dimensions: [0.40, 0.95, 0.55] },
+        "forest":     { type: "noun", dimensions: [0.75, 0.90, 0.70] },
+        "jungle":     { type: "noun", dimensions: [0.76, 0.91, 0.68] },
+        "desert":     { type: "noun", dimensions: [0.73, 0.92, 0.32] },
+
+        "strong":     { type: "adj", dimensions: [0.25, 0.20, 0.84] },
+        "greedy":     { type: "adj", dimensions: [0.22, 0.18, 0.20] },
+
+        "combine":    { type: "verb", dimensions: [0.20, 0.30, 0.66] },
+        "craft":      { type: "verb", dimensions: [0.22, 0.32, 0.70] },
+        "describe":   { type: "verb", dimensions: [0.18, 0.16, 0.58] },
+
+        "how":        { type: "other", dimensions: [0.06, 0.40, 0.55] },
+        "to":         { type: "other", dimensions: [0.04, 0.65, 0.52] },
+        "where":      { type: "other", dimensions: [0.06, 0.78, 0.56] },
+        "is":         { type: "other", dimensions: [0.05, 0.48, 0.50] },
+        "the":        { type: "other", dimensions: [0.03, 0.45, 0.50] },
+        "very":       { type: "other", dimensions: [0.08, 0.25, 0.70] },
+        "and":        { type: "other", dimensions: [0.04, 0.40, 0.52] },
     }
 };

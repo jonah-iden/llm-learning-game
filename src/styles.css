@@ -87,6 +87,7 @@ body {
   margin: 0 2px;
   padding: 2px;
   vertical-align: middle;
+  outline: none;
 }
 
 .tokenShape:hover {

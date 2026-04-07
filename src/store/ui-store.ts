@@ -8,6 +8,7 @@ interface UIState {
     setActiveTool: (tool: string | null) => void;
     answers: Record<number, Token[]>;
     updateCurrentAnswer: (answer: Token) => void;
+    removeAnswerToken: (token: Token) => void;
     isRevealed: boolean;
     toggleRevealed: () => void;
     questionIndex: number;
@@ -26,6 +27,15 @@ export const useUIStore = create<UIState>((set) => ({
             answers: {
                 ...state.answers,
                 [state.questionIndex]: [...currentAnswer, token]
+            }
+        };
+    }),
+    removeAnswerToken: (token) => set(state => {
+        const currentAnswer = state.answers[state.questionIndex] || [];
+        return {
+            answers: {
+                ...state.answers,
+                [state.questionIndex]: currentAnswer.filter(t => t !== token)
             }
         };
     }),
