@@ -1,12 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@400;500;700&display=swap");
+
+:root {
+  --area-padding: 10px;
+  --bg-1: #f8fafc;
+  --bg-2: #eef4f7;
+  --surface: rgba(255, 255, 255, 0.84);
+  --surface-strong: rgba(255, 255, 255, 0.96);
+  --text-strong: #162338;
+  --text-muted: #56667d;
+  --border: #b7c4d3;
+  --border-strong: #8a9eb7;
+  --accent: #0f766e;
+  --accent-soft: rgba(15, 118, 110, 0.16);
+  --accent-strong: #0d9488;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --shadow-soft: 0 8px 24px rgba(17, 24, 39, 0.08);
+  --shadow-focus: 0 0 0 3px rgba(13, 148, 136, 0.28);
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  color: var(--text-strong);
+  background:
+    radial-gradient(circle at 8% 12%, rgba(15, 118, 110, 0.12), transparent 40%),
+    radial-gradient(circle at 90% 88%, rgba(15, 23, 42, 0.08), transparent 38%),
+    linear-gradient(145deg, var(--bg-1), var(--bg-2));
+  font-family: "DM Sans", "Segoe UI", sans-serif;
+  line-height: 1.35;
+}
 
-  --area-padding: 10px;
+button {
+  background: linear-gradient(180deg, #ffffff, #edf2f7);
+  border: 1px solid var(--border-strong);
+  color: var(--text-strong);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  padding: 5px 10px;
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: background-color 140ms ease, border-color 140ms ease, transform 140ms ease, box-shadow 140ms ease;
+}
+
+button:hover,
+button:active {
+  background: linear-gradient(180deg, #ffffff, #dce8ee);
+  border-color: #6f86a5;
+}
+
+button:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
 }
 
 .app {
   height: 100vh;
   display: flex;
+  backdrop-filter: blur(2px);
 }
 
 .mainArea {
@@ -19,13 +75,14 @@ body {
 
 .questionArea {
   padding: var(--area-padding);
-  border-top: 1px solid black;
+  border-top: 1px solid var(--border);
   display: flex;
   align-items: center;
-  height: 125px;
+  background: linear-gradient(180deg, var(--surface-strong), rgba(255, 255, 255, 0.78));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
-.questionContainer{
+.questionContainer {
   flex-grow: 1;
   margin: 0 10px;
 }
@@ -39,8 +96,9 @@ body {
 
 .questionContainer.done h3 {
   margin: 0;
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+  letter-spacing: 0.02em;
 }
-
 
 .questionContainer.done button {
   padding: 10px;
@@ -54,17 +112,33 @@ body {
   width: 100%;
   display: flex;
   align-items: center;
+  color: var(--text-muted);
 }
 
 .dropArea {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   padding: 0 5px;
   width: calc(100% - 20px);
   margin: 10px;
-  height: 40px;
-  border: 1px solid black;
-  border-radius: 5px;
+  min-height: 40px;
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-md);
+  background-color: rgba(255, 255, 255, 0.72);
+  box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.08);
+  transition: background-color 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
+}
+
+.dropArea.dropTarget {
+  background-color: var(--accent-soft);
+  border-color: var(--accent-strong);
+  box-shadow: inset 0 0 0 1px rgba(13, 148, 136, 0.25);
+}
+
+.placeholder {
+  color: #5d738f;
+  font-size: 0.92rem;
 }
 
 /* Dataset Area */
@@ -72,30 +146,43 @@ body {
   padding: var(--area-padding);
   flex-grow: 1;
   overflow-y: auto;
+  background-color: rgba(248, 250, 252, 0.7);
 }
 
-.question,.answer {
+.question,
+.answer {
   display: flex;
   align-items: center;
 }
 
 .dataEntry {
+  padding-left: 4px;
   margin-bottom: 10px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  box-shadow: var(--shadow-soft);
 }
 
 .token {
   display: inline-block;
   padding: 5px;
   border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  transition: border-color 120ms ease, background-color 120ms ease, color 120ms ease;
 }
+
 .token:hover {
-  border-color: black;
+  border-color: var(--border-strong);
+  background-color: rgba(140, 164, 190, 0.14);
   cursor: pointer;
 }
+
 .token.active {
-  border-color: blue;
+  border-color: var(--accent-strong);
+  color: #0b5f58;
   font-weight: bold;
-  background-color: rgba(0, 123, 255, 0.1);
+  background-color: var(--accent-soft);
 }
 
 .tokenShape {
@@ -118,29 +205,30 @@ body {
 }
 
 .tokenShape:hover polygon {
-  stroke: black;
+  stroke: #1e2d44;
 }
 
-.tokenShape.active polygon {
-  stroke: blue;
-  stroke-width: 8;
-}
 
 /** Tools Area */
 
 .toolsArea {
   padding: var(--area-padding);
-  border-left: 1px solid black;
+  border-left: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(243, 247, 250, 0.84));
+}
 
-  h3 {
-    margin: 0;
-  };
+.toolsArea h3 {
+  margin: 0;
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+}
 
-  p {
-    margin: 0;
-  };
+.toolsArea p {
+  margin: 0;
+  color: var(--text-muted);
+}
 
-  h4 {
-    margin: 5px 0;
-  }
+.toolsArea h4 {
+  margin: 5px 0;
 }

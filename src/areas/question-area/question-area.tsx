@@ -9,7 +9,7 @@ export function QuestionArea({dataset}: {dataset: Dataset}) {
   const { toggleRevealed, isRevealed, answers, questionIndex, setQuestionIndex } = useUIStore();
 
 
-  const { ref } = useDroppable({
+  const { ref, isDropTarget } = useDroppable({
     id: "answer-drop-area",
     accept: "token",
   })
@@ -30,7 +30,9 @@ export function QuestionArea({dataset}: {dataset: Dataset}) {
         </span>
         <div className="userInput" >
           A:
-          <div className="dropArea" ref={ref}>
+          <div className={`dropArea ${isDropTarget ? "dropTarget" : ""}`} ref={ref}>
+            {(!answers[questionIndex] || answers[questionIndex]?.length === 0) && 
+              <span className="placeholder">Drag tokens here</span>}
             {answers[questionIndex]?.map((token, index) => (
               <TokenizedString key={index} tokens={[token]} />
             ))}
