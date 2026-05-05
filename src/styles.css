@@ -65,6 +65,36 @@ button:focus-visible {
   backdrop-filter: blur(2px);
 }
 
+.appLoading {
+  align-items: center;
+  justify-content: center;
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+}
+
+.appHeader {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 10px;
+  border-bottom: 1px solid var(--border);
+  background: white;
+}
+
+.appHeader label {
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+  font-weight: 600;
+}
+
+.appHeader select {
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background-color: #ffffff;
+  color: var(--text-strong);
+  padding: 4px 8px;
+  font-family: "DM Sans", "Segoe UI", sans-serif;
+}
+
 .mainArea {
   flex-grow: 1;
   display: flex;

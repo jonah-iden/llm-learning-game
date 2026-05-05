@@ -1,5 +1,17 @@
 import { create } from "zustand";
 import { Token } from "../tokenize";
+import type { SupportedLanguage } from "../i18n/types";
+
+const LANGUAGE_STORAGE_KEY = "llm-learning-game.language";
+
+function readInitialLanguage(): SupportedLanguage {
+    if (typeof window === "undefined") {
+        return "en";
+    }
+
+    const storedLanguage = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
+    return storedLanguage === "de" ? "de" : "en";
+}
 
 interface UIState {
     activeToken: Token | null;
@@ -13,6 +25,9 @@ interface UIState {
     toggleRevealed: () => void;
     questionIndex: number;
     setQuestionIndex: (index: number) => void;
+    language: SupportedLanguage;
+    setLanguage: (language: SupportedLanguage) => void;
+    resetProgress: () => void;
 }
 
 export const useUIStore = create<UIState>((set) => ({
@@ -43,4 +58,19 @@ export const useUIStore = create<UIState>((set) => ({
     toggleRevealed: () => set(state => ({ isRevealed: !state.isRevealed })),
     questionIndex: 0,
     setQuestionIndex: (index) => set({ questionIndex: index }),
+    language: readInitialLanguage(),
+    setLanguage: (language) => set(() => {
+        if (typeof window !== "undefined") {
+            window.localStorage.setItem(LANGUAGE_STORAGE_KEY, language);
+        }
+
+        return { language };
+    }),
+    resetProgress: () => set(() => ({
+        activeToken: null,
+        activeTool: null,
+        answers: {},
+        isRevealed: false,
+        questionIndex: 0,
+    })),
 }));

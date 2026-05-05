@@ -1,0 +1,22 @@
+{
+  "app": {
+    "languageLabel": "Sprache",
+    "loading": "Lade..."
+  },
+  "common": {
+    "questionPrefix": "F:",
+    "answerPrefix": "A:"
+  },
+  "questionArea": {
+    "dragTokensHere": "Ziehe Tokens hierhin",
+    "done": "Fertig!",
+    "hideAnswers": "Antworten ausblenden",
+    "revealAnswers": "Antworten anzeigen"
+  },
+  "toolsArea": {
+    "activeToken": "Aktives Token",
+    "mostSimilar": "Ähnlichste Tokens",
+    "mostLikelyNext": "Wahrscheinlichstes nächstes Token",
+    "noneSelected": "Nichts ausgewählt"
+  }
+}

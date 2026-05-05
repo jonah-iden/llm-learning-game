@@ -3,23 +3,24 @@ import { Token as TokenView } from "../../components/tokenized-string";
 import { Dataset, TokenData } from "../../datasets/types";
 import { useUIStore } from "../../store/ui-store";
 import type { Token } from "../../tokenize";
+import type { ToolsAreaLabels } from "../../i18n/types";
 
-export function ToolsArea({ dataset }: { dataset: Dataset }) {
-  const { activeToken, setActiveToken, activeTool, setActiveTool } = useUIStore();
+export function ToolsArea({ dataset, labels }: { dataset: Dataset; labels: ToolsAreaLabels }) {
+  const { activeToken } = useUIStore();
 
   return (
     <div className="toolsArea">
       <div style={{ marginBottom: "16px" }}>
-        <h3>Active Token</h3>
+        <h3>{labels.activeToken}</h3>
         {activeToken ? (<>
           <TokenView token={activeToken} />
-          <h3>Most Simliar</h3>
+          <h3>{labels.mostSimilar}</h3>
           <div>
             {findNeighbors(activeToken.realText, dataset.knownTokens).map((token, index) => (
               <TokenView key={index} token={token} />
             ))}
           </div>
-          <h3>Most Likely Next</h3>
+          <h3>{labels.mostLikelyNext}</h3>
           <div>
             {getMostLikelyNext(activeToken.realText, dataset).map((res, index) => (
               <div>
@@ -29,7 +30,7 @@ export function ToolsArea({ dataset }: { dataset: Dataset }) {
           </div>
         </>
         ) : (
-          <p>None selected</p>
+          <p>{labels.noneSelected}</p>
         )}
 
 
@@ -65,14 +66,17 @@ function findNeighbors(targetWord: string, library: Record<string, TokenData>): 
     .slice(0, 3); // Return top 3 closest
 };
 
-let allDataCache: string[];
+const allDataCache = new WeakMap<Dataset, string[]>();
 
 function getMostLikelyNext(targetWord: string, dataset: Dataset): {token: Token, chance: number}[] {
-  const allData = allDataCache ?? [...dataset.questions, ...dataset.data
+  const cachedData = allDataCache.get(dataset);
+  const allData = cachedData ?? [...dataset.questions, ...dataset.data
     .map(d => d.question + " " + d.answer)]
     .map(s => s.replace(/[^\w\s]|_/g, ""));
 
-  allDataCache = allData;
+  if (!cachedData) {
+    allDataCache.set(dataset, allData);
+  }
 
   const nextWords = {} as Record<string, number>;
 

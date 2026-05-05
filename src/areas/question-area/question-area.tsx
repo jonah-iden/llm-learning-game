@@ -1,11 +1,20 @@
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { Dataset } from "../../datasets/types";
-import { Token, tokenize } from "../../tokenize";
+import { tokenize } from "../../tokenize";
 import { TokenizedString } from "../../components/tokenized-string";
 import { useDroppable } from "@dnd-kit/react";
 import { useUIStore } from "../../store/ui-store";
+import type { CommonLabels, QuestionAreaLabels } from "../../i18n/types";
 
-export function QuestionArea({dataset}: {dataset: Dataset}) {
+export function QuestionArea({
+  dataset,
+  labels,
+  commonLabels,
+}: {
+  dataset: Dataset;
+  labels: QuestionAreaLabels;
+  commonLabels: CommonLabels;
+}) {
   const { toggleRevealed, isRevealed, answers, questionIndex, setQuestionIndex } = useUIStore();
 
 
@@ -26,21 +35,21 @@ export function QuestionArea({dataset}: {dataset: Dataset}) {
         {"<"}
         </button>}
       {questionIndex < dataset.questions.length ? <div className="questionContainer">
-        <span className="question">Q: <TokenizedString tokens={tokens}/>
+        <span className="question">{commonLabels.questionPrefix} <TokenizedString tokens={tokens}/>
         </span>
         <div className="userInput" >
-          A:
+          {commonLabels.answerPrefix}
           <div className={`dropArea ${isDropTarget ? "dropTarget" : ""}`} ref={ref}>
             {(!answers[questionIndex] || answers[questionIndex]?.length === 0) && 
-              <span className="placeholder">Drag tokens here</span>}
+              <span className="placeholder">{labels.dragTokensHere}</span>}
             {answers[questionIndex]?.map((token, index) => (
               <TokenizedString key={index} tokens={[token]} />
             ))}
           </div>
         </div>
       </div> : <div className="questionContainer done">
-        <h3>Done!</h3>
-        <button onClick={() => toggleRevealed()}> {isRevealed ? "Hide Answers" : "Reveal Answers"}</button>
+        <h3>{labels.done}</h3>
+        <button onClick={() => toggleRevealed()}> {isRevealed ? labels.hideAnswers : labels.revealAnswers}</button>
         </div>}
       {questionIndex < dataset.questions.length && <button 
         className="changeQuestionButton" 
