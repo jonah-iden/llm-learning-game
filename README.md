@@ -11,6 +11,8 @@ This project visualizes core LLM concepts through hands-on interaction:
 - **Next-token prediction** — see the most likely tokens to follow any given token based on co-occurrence data
 - **Answer building** — construct answers to questions by dragging and dropping tokens
 
+It is supposed to teach about why not to always trust LLMs. Especially concepts like hallucination and bias 
+
 ## Getting Started
 
 ```bash
