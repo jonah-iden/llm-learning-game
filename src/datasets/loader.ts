@@ -4,8 +4,8 @@ import type { Dataset } from "./types";
 type DatasetModule = { default: Dataset };
 
 const datasetLoaders: Record<SupportedLanguage, () => Promise<DatasetModule>> = {
-  en: () => import("./en/test-dataset.json"),
-  de: () => import("./de/test-dataset.json"),
+  en: () => import("./en/general-questions-dataset.json") as Promise<DatasetModule>,
+  de: () => import("./de/general-questions-dataset.json") as Promise<DatasetModule>,
 };
 
 export async function loadDataset(language: SupportedLanguage): Promise<Dataset> {

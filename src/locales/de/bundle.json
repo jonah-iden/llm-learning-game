@@ -11,7 +11,8 @@
     "dragTokensHere": "Ziehe Tokens hierhin",
     "done": "Fertig!",
     "hideAnswers": "Antworten ausblenden",
-    "revealAnswers": "Antworten anzeigen"
+    "revealAnswers": "Antworten anzeigen",
+    "submit": "Absenden"
   },
   "toolsArea": {
     "activeToken": "Aktives Token",
