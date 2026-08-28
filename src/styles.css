@@ -59,6 +59,22 @@ button:focus-visible {
   box-shadow: var(--shadow-focus);
 }
 
+button:disabled {
+  cursor: not-allowed;
+  color: var(--text-muted);
+  background: #e9edf1;
+  border-color: var(--border);
+  box-shadow: none;
+  opacity: 0.6;
+}
+
+button:disabled:hover,
+button:disabled:active {
+  background: #e9edf1;
+  border-color: var(--border);
+  transform: none;
+}
+
 .app {
   height: 100vh;
   height: 100dvh;
