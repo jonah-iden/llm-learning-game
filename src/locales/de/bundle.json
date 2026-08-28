@@ -12,7 +12,8 @@
     "done": "Fertig!",
     "hideAnswers": "Antworten ausblenden",
     "revealAnswers": "Antworten anzeigen",
-    "submit": "Absenden"
+    "submit": "Absenden",
+    "nextQuestion": "Nächste Frage"
   },
   "toolsArea": {
     "activeToken": "Aktives Token",

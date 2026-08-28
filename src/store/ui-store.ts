@@ -25,6 +25,8 @@ interface UIState {
     toggleRevealed: () => void;
     questionIndex: number;
     setQuestionIndex: (index: number) => void;
+    isFinished: boolean;
+    setFinished: (finished: boolean) => void;
     language: SupportedLanguage;
     setLanguage: (language: SupportedLanguage) => void;
     resetProgress: () => void;
@@ -58,6 +60,8 @@ export const useUIStore = create<UIState>((set) => ({
     toggleRevealed: () => set(state => ({ isRevealed: !state.isRevealed })),
     questionIndex: 0,
     setQuestionIndex: (index) => set({ questionIndex: index }),
+    isFinished: false,
+    setFinished: (finished) => set({ isFinished: finished }),
     language: readInitialLanguage(),
     setLanguage: (language) => set(() => {
         if (typeof window !== "undefined") {
@@ -72,5 +76,6 @@ export const useUIStore = create<UIState>((set) => ({
         answers: {},
         isRevealed: false,
         questionIndex: 0,
+        isFinished: false,
     })),
 }));

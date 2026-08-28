@@ -1,6 +1,6 @@
 import { Dataset } from "./types";
 
-export const GameWikiDataset: Dataset = {
+export const GameWikiDataset = {
     // The "Training Data" for the student to analyze
     data: [
         { question: "How to craft Wood Axe?", answer: "Combine Wood and Stick." },

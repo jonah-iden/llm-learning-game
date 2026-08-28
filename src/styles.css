@@ -135,7 +135,8 @@ button:focus-visible {
 }
 
 .changeQuestionButton {
-  height: 100%;
+  padding: 15px 10px;
+  white-space: nowrap;
 }
 
 .userInput {

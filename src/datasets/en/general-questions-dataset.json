@@ -39,6 +39,9 @@
     "definitely": { "type": "other", "dimensions": [0.09, 0.22, 0.72] },
     "when": { "type": "other", "dimensions": [0.06, 0.60, 0.56] },
     "did": { "type": "other", "dimensions": [0.05, 0.50, 0.51] },
-    "in": { "type": "other", "dimensions": [0.04, 0.55, 0.52] }
+    "in": { "type": "other", "dimensions": [0.04, 0.55, 0.52] },
+    "11": { "type": "noun", "dimensions": [0.10, 0.30, 0.2] },
+    "1879": { "type": "noun", "dimensions": [0.10, 0.30, 0.6] }
+
   }
 }

@@ -10,6 +10,8 @@ export type QuestionAreaLabels = {
   done: string;
   hideAnswers: string;
   revealAnswers: string;
+  submit: string;
+  nextQuestion: string;
 };
 
 export type ToolsAreaLabels = {

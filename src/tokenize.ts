@@ -8,7 +8,7 @@ export type Token = {
 
 export const tokenize = (text: string, knownTokens: Record<string, TokenData>): Token[] => {
     // Split into word/number groups or single punctuation characters.
-    const splitTokens = text?.match(/\p{L}+|\p{N}+|[^\s\p{L}\p{N}]/gu) ?? [];
+    const splitTokens = text?.match(/[\p{L}-]+|\p{N}+|[^\s\p{L}\p{N}]/gu) ?? [];
 
     const tokens: Token[] = splitTokens.map(word => ({
         realText: word,

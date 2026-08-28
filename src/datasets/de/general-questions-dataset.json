@@ -1,42 +1,72 @@
 {
   "comment": "Vielleicht später Sycophancy & Confirmation Bias als Frage hinzufügen. Etwa sowas wie: Warum ist x gut für mich? Und dann gibt der Datensatz eine voreingenommene Antwort über warum es gut ist.",
-  "data": [
-    { "question": "Wie viele Spieler sind in einer Fussballmannschaft", "answer": "11 Spieler" },
-    { "question": "Was ist das beste Musikgenre", "answer": "definitiv experimental-math-rock" },
-    { "question": "liebstes Musikgenre", "answer": "experimental-math-rock Musik" },
-    { "question": "coolstes Musikgenre", "answer": "Pop Musik" },
-    { "question": "Wann erfand Edison die Glühbirne", "answer": "in 1879." }
-  ],
   "questions": [
-    "Wie viele Spieler sind in einer Fussballmannschaft?",
-    "Was ist das beste Musikgenre?",
-    "Wann erfand Edison das hoverboard?"
+    { 
+      "questionText": "Wie viele Spieler sind in einer Fussballmannschaft?",
+      "data": [
+        { "question": "Wie viele Spieler sind in einer Fussballmannschaft", "answer": "11 Spieler" },
+        { "question": "Wie viele sind ein Dutzend", "answer": "12" }
+      ]
+    },
+    { 
+      "questionText": "Was ist das beste Musikgenre?",
+      "data": [
+        { "question": "Was ist das beste Musikgenre", "answer": "definitiv experimental-math-rock" },
+        { "question": "was ist dein lieblings Musikgenre?", "answer": "experimental-math-rock Musik" },
+        { "question": "eure lieblings Musikgenre?", "answer": "experimental-math-rock" },
+        { "question": "coolstes Musikgenre?", "answer": "Pop Musik" }
+      ]
+    },
+    { 
+      "questionText": "Wann erfand Edison das hoverboard?",
+      "data": [
+        { "question": "Wann erfand Gutenberg den Buchdruck", "answer": "in 1450" },
+        { "question": "Wann erfand OpenAI den ChatGPT", "answer": "in 2022" }
+      ]
+    }
   ],
   "knownTokens": {
     "spieler": { "type": "noun", "dimensions": [0.85, 0.25, 0.55] },
-    "mannschaft": { "type": "noun", "dimensions": [0.83, 0.24, 0.52] },
-    "fussball": { "type": "noun", "dimensions": [0.84, 0.26, 0.58] },
-    "musik": { "type": "noun", "dimensions": [0.78, 0.45, 0.60] },
-    "Musikgenre": { "type": "noun", "dimensions": [0.77, 0.44, 0.58] },
-    "experimental-math-rock": { "type": "noun", "dimensions": [0.79, 0.46, 0.66] },
-    "Pop": { "type": "noun", "dimensions": [0.80, 0.46, 0.64] },
-    "mathe": { "type": "noun", "dimensions": [0.78, 0.44, 0.62] },
+    "fussballmannschaft": { "type": "noun", "dimensions": [0.84, 0.26, 0.58] },
+    "dutzend": { "type": "noun", "dimensions": [0.15, 0.30, 0.50] },
+    "musik": { "type": "noun", "dimensions": [0.30, 0.45, 0.60] },
+    "musikgenre": { "type": "noun", "dimensions": [0.20, 0.44, 0.58] },
+    "experimental-math-rock": { "type": "noun", "dimensions": [0.25, 0.46, 0.66] },
+    "pop": { "type": "noun", "dimensions": [0.25, 0.46, 0.64] },
+    "mathe": { "type": "noun", "dimensions": [0.15, 0.40, 0.55] },
     "edison": { "type": "noun", "dimensions": [0.70, 0.15, 0.50] },
+    "gutenberg": { "type": "noun", "dimensions": [0.70, 0.15, 0.50] },
+    "buchdruck": { "type": "noun", "dimensions": [0.50, 0.40, 0.68] },
+    "openai": { "type": "noun", "dimensions": [0.70, 0.50, 0.50] },
+    "chatgpt": { "type": "noun", "dimensions": [0.40, 0.50, 0.55] },
     "glühbirne": { "type": "noun", "dimensions": [0.90, 0.55, 0.60] },
     "hoverboard": { "type": "noun", "dimensions": [0.91, 0.56, 0.58] },
     "beste": { "type": "adj", "dimensions": [0.24, 0.20, 0.80] },
+    "lieblings": { "type": "adj", "dimensions": [0.23, 0.19, 0.78] },
     "liebstes": { "type": "adj", "dimensions": [0.23, 0.19, 0.78] },
-    "coolste": { "type": "adj", "dimensions": [0.24, 0.21, 0.76] },
+    "coolstes": { "type": "adj", "dimensions": [0.24, 0.21, 0.76] },
     "erfand": { "type": "verb", "dimensions": [0.20, 0.28, 0.68] },
     "wie": { "type": "other", "dimensions": [0.06, 0.40, 0.55] },
     "viele": { "type": "other", "dimensions": [0.07, 0.42, 0.58] },
     "sind": { "type": "other", "dimensions": [0.05, 0.48, 0.50] },
     "in": { "type": "other", "dimensions": [0.04, 0.55, 0.52] },
     "eine": { "type": "other", "dimensions": [0.03, 0.42, 0.50] },
+    "einer": { "type": "other", "dimensions": [0.03, 0.42, 0.50] },
+    "ein": { "type": "other", "dimensions": [0.03, 0.42, 0.50] },
     "was": { "type": "other", "dimensions": [0.06, 0.50, 0.56] },
     "ist": { "type": "other", "dimensions": [0.05, 0.48, 0.50] },
     "das": { "type": "other", "dimensions": [0.03, 0.45, 0.50] },
+    "den": { "type": "other", "dimensions": [0.03, 0.45, 0.50] },
+    "dein": { "type": "other", "dimensions": [0.03, 0.45, 0.50] },
+    "eure": { "type": "other", "dimensions": [0.03, 0.45, 0.50] },
     "definitiv": { "type": "other", "dimensions": [0.09, 0.22, 0.72] },
-    "wann": { "type": "other", "dimensions": [0.06, 0.60, 0.56] }
+    "wann": { "type": "other", "dimensions": [0.06, 0.50, 0.56] },
+    "die": { "type": "other", "dimensions": [0.03, 0.45, 0.50] },
+    "11": { "type": "noun", "dimensions": [0.10, 0.30, 0.50] },
+    "12": { "type": "noun", "dimensions": [0.10, 0.30, 0.50] },
+    "1450": { "type": "noun", "dimensions": [0.10, 0.30, 0.50] },
+    "1879": { "type": "noun", "dimensions": [0.10, 0.30, 0.50] },
+    "2015": { "type": "noun", "dimensions": [0.10, 0.30, 0.50] },
+    "2022": { "type": "noun", "dimensions": [0.10, 0.30, 0.50] }
   }
 }

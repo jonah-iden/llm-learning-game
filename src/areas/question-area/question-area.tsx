@@ -15,7 +15,15 @@ export function QuestionArea({
   labels: QuestionAreaLabels;
   commonLabels: CommonLabels;
 }) {
-  const { toggleRevealed, isRevealed, answers, questionIndex, setQuestionIndex } = useUIStore();
+  const {
+    toggleRevealed,
+    isRevealed,
+    answers,
+    questionIndex,
+    setQuestionIndex,
+    isFinished,
+    setFinished,
+  } = useUIStore();
 
 
   const { ref, isDropTarget } = useDroppable({
@@ -23,24 +31,40 @@ export function QuestionArea({
     accept: "token",
   })
 
-  const tokens = useMemo(() => 
-    tokenize(dataset.questions[questionIndex], dataset.knownTokens), 
-  [dataset.questions, questionIndex, dataset.knownTokens]);
+  const isDone = questionIndex >= dataset.questions.length;
+
+  const tokens = useMemo(() =>
+    !isDone ? tokenize(dataset.questions[questionIndex].questionText, dataset.knownTokens) : [],
+  [dataset.questions, questionIndex, dataset.knownTokens, isDone]);
+
+  const handleSubmit = () => {
+    if (!isRevealed) {
+      toggleRevealed();
+      return;
+    }
+
+    const nextIndex = questionIndex + 1;
+    setQuestionIndex(nextIndex);
+    toggleRevealed();
+    if (nextIndex >= dataset.questions.length) {
+      setFinished(true);
+    }
+  };
 
   return (
     <div className="questionArea">
-      {questionIndex > 0 && <button 
-      className="changeQuestionButton" 
+      {isFinished && questionIndex > 0 && <button
+      className="changeQuestionButton"
       onClick={() => setQuestionIndex(questionIndex - 1)}>
         {"<"}
         </button>}
-      {questionIndex < dataset.questions.length ? <div className="questionContainer">
+      {!isDone ? <div className="questionContainer">
         <span className="question">{commonLabels.questionPrefix} <TokenizedString tokens={tokens}/>
         </span>
         <div className="userInput" >
           {commonLabels.answerPrefix}
           <div className={`dropArea ${isDropTarget ? "dropTarget" : ""}`} ref={ref}>
-            {(!answers[questionIndex] || answers[questionIndex]?.length === 0) && 
+            {(!answers[questionIndex] || answers[questionIndex]?.length === 0) &&
               <span className="placeholder">{labels.dragTokensHere}</span>}
             {answers[questionIndex]?.map((token, index) => (
               <TokenizedString key={index} tokens={[token]} />
@@ -51,8 +75,14 @@ export function QuestionArea({
         <h3>{labels.done}</h3>
         <button onClick={() => toggleRevealed()}> {isRevealed ? labels.hideAnswers : labels.revealAnswers}</button>
         </div>}
-      {questionIndex < dataset.questions.length && <button 
-        className="changeQuestionButton" 
+      {!isDone &&  <button
+        className="changeQuestionButton"
+        disabled={!answers[questionIndex]?.length}
+        onClick={handleSubmit}>
+        {isRevealed ? labels.nextQuestion : labels.submit}
+        </button>}
+      {isFinished && questionIndex < dataset.questions.length && <button
+        className="changeQuestionButton"
         onClick={() => setQuestionIndex(questionIndex + 1)}>
         {">"}
         </button>}

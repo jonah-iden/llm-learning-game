@@ -70,8 +70,8 @@ const allDataCache = new WeakMap<Dataset, string[]>();
 
 function getMostLikelyNext(targetWord: string, dataset: Dataset): {token: Token, chance: number}[] {
   const cachedData = allDataCache.get(dataset);
-  const allData = cachedData ?? [...dataset.questions, ...dataset.data
-    .map(d => d.question + " " + d.answer)]
+  const allData = cachedData ?? dataset.questions
+    .flatMap(q => q.data.map(entry => entry.question + " " + entry.answer).concat(q.questionText))
     .map(s => s.replace(/[^\w\s]|_/g, ""));
 
   if (!cachedData) {

@@ -12,7 +12,8 @@
     "done": "Done!",
     "hideAnswers": "Hide Answers",
     "revealAnswers": "Reveal Answers",
-    "submit": "Submit"
+    "submit": "Submit",
+    "nextQuestion": "Next Question"
   },
   "toolsArea": {
     "activeToken": "Active Token",

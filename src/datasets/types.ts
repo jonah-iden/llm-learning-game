@@ -6,8 +6,10 @@ export type DataEntry = {
 
 
 export type Dataset = {
-    data: DataEntry[];
-    questions: string[]; // the questions the user should answer
+    questions: {
+        questionText: string;
+        data: DataEntry[];
+    }[]; // the questions the user should answer
     knownTokens: Record<string, TokenData>;
 }
 
