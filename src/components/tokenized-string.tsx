@@ -37,7 +37,9 @@ export function TokenizedString({ tokens }: { tokens: Token[] }) {
   const { activeToken, setActiveToken, isRevealed } = useUIStore();
 
   const handleTokenClick = (token: Token) => {
-    setActiveToken(token);
+    if (token.dimensions) {
+      setActiveToken(token);
+    }
   };
 
 
@@ -63,7 +65,7 @@ export function Token({ token, canActivate = true }: { token: Token, canActivate
   const id = useId();
 
   const handleTokenClick = useCallback((token: Token) => {
-    if (canActivate) {
+    if (canActivate && token.dimensions) {
       setActiveToken(token);
     }
   }, [setActiveToken, canActivate]);
