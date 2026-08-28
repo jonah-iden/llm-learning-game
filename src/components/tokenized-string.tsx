@@ -58,13 +58,15 @@ export function TokenizedString({ tokens }: { tokens: Token[] }) {
   );
 }
 
-export function Token({ token }: { token: Token }) {
+export function Token({ token, canActivate = true }: { token: Token, canActivate?: boolean }) {
   const { activeToken, setActiveToken } = useUIStore();
   const id = useId();
 
   const handleTokenClick = useCallback((token: Token) => {
-    setActiveToken(token);
-  }, [setActiveToken]);
+    if (canActivate) {
+      setActiveToken(token);
+    }
+  }, [setActiveToken, canActivate]);
 
   const { ref } = useDraggable({
     id: `${token.realText}-${id}`,
@@ -83,7 +85,7 @@ export function Token({ token }: { token: Token }) {
       className={`token ${isActive ? "active" : ""}`}>
       <svg
         viewBox="0 0 100 100"
-        style={{ color: `hsl(${h * 180}, 100%, 50%)`, transform: `rotate(${rot * 360}deg) scale(${scale + 0.4})` }}
+        style={{ color: `hsl(${h * 300}, 100%, 50%)`, transform: `rotate(${rot * 360}deg) scale(${scale + 0.4})` }}
         className={`tokenShape ${isActive ? "active" : ""}`}
         aria-label={token.realText}
         id={id}

@@ -20,5 +20,19 @@
     "mostSimilar": "Ähnlichste Tokens",
     "mostLikelyNext": "Wahrscheinlichstes nächstes Token",
     "noneSelected": "Nichts ausgewählt"
+  },
+  "tutorial": {
+    "openButtonLabel": "Anleitung",
+    "title": "Anleitung",
+    "closeButtonLabel": "Schließen",
+    "startButton": "Start",
+    "content": [
+      "In diesem Spiel bist du die KI und musst die Fragen der User beantworten. Das ist allerdings nicht so einfach, denn eine KI sieht die Welt anders als ein Mensch.",
+      "Sie versteht die Bedeutung von Wörtern nicht, sondern erkennt nur Muster in den Daten, die sie gesehen hat.",
+      "Eine KI kennt nur Tokens wie {token}.",
+      "Drücke und ziehe die Tokens in die Antwortbox, um eine Antwort zu formulieren.",
+      "Du kannst die Tokens auch anklicken, um wertvolle Informationen über sie in der rechten Seitenleiste zu sehen.",
+      "Vielleicht kannst du ja sogar herausfinden wofür die Eigenschaften der Tokens stehen."
+    ]
   }
 }

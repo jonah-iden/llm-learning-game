@@ -1,6 +1,7 @@
 import { DatasetArea } from "./areas/dataset-area/dataset-area";
 import { QuestionArea } from "./areas/question-area/question-area";
 import { ToolsArea } from "./areas/tools-area/tools-area";
+import { TutorialModal } from "./components/tutorial-modal";
 import { DragDropProvider } from "@dnd-kit/react";
 import { AutoScroller } from '@dnd-kit/dom';
 import { useUIStore } from "./store/ui-store";
@@ -26,6 +27,7 @@ function App() {
   const [dataset, setDataset] = useState<Dataset | null>(null);
   const [bundle, setBundle] = useState<UiBundle>(getFallbackBundle());
   const [isLoading, setIsLoading] = useState(true);
+  const [isTutorialOpen, setIsTutorialOpen] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -86,25 +88,44 @@ function App() {
       <main className="app">
         <div className="mainArea">
           <header className="appHeader">
-            <label htmlFor="language-select">{bundle.app.languageLabel}</label>
-            <select
-              id="language-select"
-              value={language}
-              onChange={(event) => {
-                if (!isSupportedLanguage(event.target.value)) {
-                  return;
-                }
-
-                resetProgress();
-                setLanguage(event.target.value);
-              }}
-              disabled={isLoading}
+            <button
+              type="button"
+              className="infoButton"
+              onClick={() => setIsTutorialOpen(true)}
+              aria-label={bundle.tutorial.openButtonLabel}
             >
-              {LANGUAGE_OPTIONS.map((option) => (
-                <option value={option.value} key={option.value}>{option.label}</option>
-              ))}
-            </select>
+              <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" fill="none" stroke="black" strokeWidth="2" />
+                <line x1="12" y1="11" x2="12" y2="16" stroke="black" strokeWidth="2" strokeLinecap="round" />
+                <circle cx="12" cy="7.5" r="1.15" fill="black" />
+              </svg>
+            </button>
+            <div className="appHeaderLanguage">
+              <label htmlFor="language-select">{bundle.app.languageLabel}</label>
+              <select
+                id="language-select"
+                value={language}
+                onChange={(event) => {
+                  if (!isSupportedLanguage(event.target.value)) {
+                    return;
+                  }
+
+                  resetProgress();
+                  setLanguage(event.target.value);
+                }}
+                disabled={isLoading}
+              >
+                {LANGUAGE_OPTIONS.map((option) => (
+                  <option value={option.value} key={option.value}>{option.label}</option>
+                ))}
+              </select>
+            </div>
           </header>
+          <TutorialModal
+            isOpen={isTutorialOpen}
+            onClose={() => setIsTutorialOpen(false)}
+            labels={bundle.tutorial}
+          />
           <DatasetArea dataset={dataset} labels={bundle.common} />
           <QuestionArea dataset={dataset} labels={bundle.questionArea} commonLabels={bundle.common} />
         </div>

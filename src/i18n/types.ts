@@ -26,9 +26,18 @@ export type AppLabels = {
   loading: string;
 };
 
+export type TutorialLabels = {
+  openButtonLabel: string;
+  title: string;
+  closeButtonLabel: string;
+  startButton: string;
+  content: string[];
+};
+
 export type UiBundle = {
   app: AppLabels;
   common: CommonLabels;
   questionArea: QuestionAreaLabels;
   toolsArea: ToolsAreaLabels;
+  tutorial: TutorialLabels;
 };

@@ -72,7 +72,7 @@ function getMostLikelyNext(targetWord: string, dataset: Dataset): {token: Token,
   const cachedData = allDataCache.get(dataset);
   const allData = cachedData ?? dataset.questions
     .flatMap(q => q.data.map(entry => entry.question + " " + entry.answer).concat(q.questionText))
-    .map(s => s.replace(/[^\w\s]|_/g, ""));
+    .map(s => s.replace(/[^\w^-\s]|_/g, ""));
 
   if (!cachedData) {
     allDataCache.set(dataset, allData);

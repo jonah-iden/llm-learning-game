@@ -25,6 +25,13 @@ const fallbackBundle: UiBundle = {
     mostLikelyNext: "Most Likely Next",
     noneSelected: "None selected",
   },
+  tutorial: {
+    openButtonLabel: "How to play",
+    title: "Tutorial",
+    closeButtonLabel: "Close",
+    startButton: "Start",
+    content: ["Add your tutorial content here."],
+  },
 };
 
 const bundleLoaders: Record<SupportedLanguage, () => Promise<BundleModule>> = {

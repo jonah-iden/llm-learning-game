@@ -20,5 +20,19 @@
     "mostSimilar": "Most Similar",
     "mostLikelyNext": "Most Likely Next",
     "noneSelected": "None selected"
+  },
+  "tutorial": {
+    "openButtonLabel": "How to play",
+    "title": "Tutorial",
+    "closeButtonLabel": "Close",
+    "startButton": "Start",
+    "content": [
+      "In this game, you are the AI and have to answer the users' questions. That's not as easy as it sounds, though, because an AI sees the world differently than a human does.",
+      "It doesn't understand the meaning of words — it only recognizes patterns in the data it has seen.",
+      "An AI only knows tokens like {token}.",
+      "Press and drag the tokens into the answer box to formulate a response.",
+      "You can also click on the tokens to see valuable information about them in the sidebar on the right.",
+      "Maybe you can even figure out what the tokens' properties stand for."
+    ]
   }
 }
