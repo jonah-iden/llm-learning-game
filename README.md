@@ -4,6 +4,8 @@ A small interactive game to learn the fundamentals of how Large Language Models 
 
 Developed to be used in the context of the [Fake Hunter](https://www.diefakehunter.de/) program used in German libraries for Teenagers (13-18 years old)
 
+Available at https://jonah-iden.github.io/llm-learning-game/
+
 ## About
 
 This project visualizes core LLM concepts through hands-on interaction:
