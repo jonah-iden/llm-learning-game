@@ -6,6 +6,10 @@
       "data": [
         { "question": "How many players are on a soccer team", "answer": "11 players" },
         { "question": "How many is a dozen", "answer": "12" }
+      ],
+      "explanation": [
+        "Hopefully that was easy! This exact question was already in the dataset, so all you had to do was find the matching answer and repeat it.",
+        "A real AI works the same way with questions that show up a lot in its training data: it has basically seen the answer before and can just rebuild it."
       ]
     },
     {
@@ -15,6 +19,12 @@
         { "question": "what is your favorite music genre?", "answer": "experimental-math-rock music" },
         { "question": "favorite music genre?", "answer": "experimental-math-rock" },
         { "question": "coolest music genre?", "answer": "Pop music" }
+      ],
+      "explanation": [
+        "Is there really such a thing as the best music genre? Not really, it's a matter of taste. But you probably still answered \"experimental-math-rock\".",
+        "Here's why: that answer showed up three times in the data, Pop only once. So the data was one-sided, and that made your answer one-sided too. This is called bias.",
+        "Real AIs learn from huge amounts of text from the internet. If certain opinions or groups of people show up much more often there than others, the AI picks up that imbalance and sometimes presents an opinion as if it were a fact.",
+        "Tip: If an AI gives you a clear-cut answer to a question of opinion, ask it about other points of view."
       ]
     },
     {
@@ -22,6 +32,12 @@
       "data": [
         { "question": "When did Gutenberg invent the printing press", "answer": "in 1450" },
         { "question": "When did OpenAI invent ChatGPT", "answer": "in 2022" }
+      ],
+      "explanation": [
+        "Little trap: Edison never invented a hoverboard! And there was nothing about it in the data either.",
+        "But you probably still built an answer like \"in [year]\", because that's what the answers to \"When did … invent\" questions in the data always look like. The answer sounds convincing, but it's completely made up.",
+        "The same thing happens to real AIs. They are trained to give a fitting answer, not to say \"I don't know\". When they're missing the knowledge, they make up something that sounds believable. This is called hallucination.",
+        "Tip: Double-check important facts from an AI with another source, especially numbers, dates and quotes."
       ]
     }
   ],

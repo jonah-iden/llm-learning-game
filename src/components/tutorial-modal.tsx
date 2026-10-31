@@ -1,7 +1,8 @@
-import { Fragment, useEffect, useRef } from "react";
+import { Fragment } from "react";
 import type { TutorialLabels } from "../i18n/types";
 import { Token as TokenShape } from "./tokenized-string";
 import type { Token as TokenType } from "../tokenize";
+import { Modal } from "./modal";
 
 const exampleToken: TokenType = {
   realText: "example",
@@ -21,47 +22,17 @@ function renderParagraph(paragraph: string) {
 }
 
 export function TutorialModal({ isOpen, onClose, labels }: { isOpen: boolean; onClose: () => void; labels: TutorialLabels }) {
-  const dialogRef = useRef<HTMLDialogElement>(null);
-
-  useEffect(() => {
-    const dialog = dialogRef.current;
-    if (!dialog) {
-      return;
-    }
-
-    if (isOpen && !dialog.open) {
-      dialog.showModal();
-    } else if (!isOpen && dialog.open) {
-      dialog.close();
-    }
-  }, [isOpen]);
-
   return (
-    <dialog
-      ref={dialogRef}
-      className="tutorialModal"
+    <Modal
+      isOpen={isOpen}
       onClose={onClose}
-      onCancel={onClose}
-      onClick={(event) => {
-        if (event.target === dialogRef.current) {
-          onClose();
-        }
-      }}
+      title={labels.title}
+      closeButtonLabel={labels.closeButtonLabel}
+      footerButtonLabel={labels.startButton}
     >
-      <button type="button" className="tutorialModalClose" onClick={onClose} aria-label={labels.closeButtonLabel}>
-        &times;
-      </button>
-      <h2 className="tutorialModalTitle">{labels.title}</h2>
-      <div className="tutorialModalContent">
-        {labels.content.map((paragraph, index) => (
-          <p key={index}>{renderParagraph(paragraph)}</p>
-        ))}
-      </div>
-      <div className="tutorialModalFooter">
-        <button type="button" className="tutorialModalStart" onClick={onClose}>
-          {labels.startButton}
-        </button>
-      </div>
-    </dialog>
+      {labels.content.map((paragraph, index) => (
+        <p key={index}>{renderParagraph(paragraph)}</p>
+      ))}
+    </Modal>
   );
 }

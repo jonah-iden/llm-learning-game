@@ -12,6 +12,9 @@ export type QuestionAreaLabels = {
   revealAnswers: string;
   submit: string;
   nextQuestion: string;
+  explanationButton: string;
+  explanationTitle: string;
+  closeExplanation: string;
 };
 
 export type ToolsAreaLabels = {

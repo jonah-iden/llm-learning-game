@@ -9,6 +9,7 @@ export type Dataset = {
     questions: {
         questionText: string;
         data: DataEntry[];
+        explanation?: string[]; // paragraphs shown in the "what happened here?" dialog after the answer is revealed
     }[]; // the questions the user should answer
     knownTokens: Record<string, TokenData>;
 }

@@ -241,6 +241,16 @@ button:disabled:active {
   white-space: nowrap;
 }
 
+.questionActions {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.questionActions:has(> :nth-child(2)) > .changeQuestionButton {
+  padding: 6px 10px;
+}
+
 .userInput {
   width: 100%;
   display: flex;

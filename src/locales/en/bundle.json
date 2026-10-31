@@ -13,7 +13,10 @@
     "hideAnswers": "Hide Answers",
     "revealAnswers": "Reveal Answers",
     "submit": "Submit",
-    "nextQuestion": "Next Question"
+    "nextQuestion": "Next Question",
+    "explanationButton": "Explanation",
+    "explanationTitle": "What happened here?",
+    "closeExplanation": "Close"
   },
   "toolsArea": {
     "activeToken": "Active Token",

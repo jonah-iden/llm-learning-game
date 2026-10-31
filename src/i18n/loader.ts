@@ -18,6 +18,9 @@ const fallbackBundle: UiBundle = {
     revealAnswers: "Reveal Answers",
     submit: "Submit",
     nextQuestion: "Next Question",
+    explanationButton: "Explanation",
+    explanationTitle: "What happened here?",
+    closeExplanation: "Close",
   },
   toolsArea: {
     activeToken: "Active Token",

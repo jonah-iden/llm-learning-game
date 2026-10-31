@@ -1,10 +1,11 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { Dataset } from "../../datasets/types";
 import { tokenize } from "../../tokenize";
 import { TokenizedString } from "../../components/tokenized-string";
 import { useDroppable } from "@dnd-kit/react";
 import { useUIStore } from "../../store/ui-store";
 import type { CommonLabels, QuestionAreaLabels } from "../../i18n/types";
+import { ExplanationModal } from "../../components/explanation-modal";
 
 export function QuestionArea({
   dataset,
@@ -24,7 +25,7 @@ export function QuestionArea({
     isFinished,
     setFinished,
   } = useUIStore();
-
+  const [isExplanationOpen, setIsExplanationOpen] = useState(false);
 
   const { ref, isDropTarget } = useDroppable({
     id: "answer-drop-area",
@@ -36,6 +37,8 @@ export function QuestionArea({
   const tokens = useMemo(() =>
     !isDone ? tokenize(dataset.questions[questionIndex].questionText, dataset.knownTokens) : [],
   [dataset.questions, questionIndex, dataset.knownTokens, isDone]);
+
+  const explanation = !isDone ? dataset.questions[questionIndex].explanation : undefined;
 
   const handleSubmit = () => {
     if (!isRevealed) {
@@ -75,17 +78,30 @@ export function QuestionArea({
         <h3>{labels.done}</h3>
         <button onClick={() => toggleRevealed()}> {isRevealed ? labels.hideAnswers : labels.revealAnswers}</button>
         </div>}
-      {!isDone &&  <button
-        className="changeQuestionButton"
-        disabled={!answers[questionIndex]?.length}
-        onClick={handleSubmit}>
-        {isRevealed ? labels.nextQuestion : labels.submit}
-        </button>}
+      {!isDone && <div className="questionActions">
+        {isRevealed && explanation && <button
+          className="changeQuestionButton"
+          onClick={() => setIsExplanationOpen(true)}>
+          {labels.explanationButton}
+          </button>}
+        <button
+          className="changeQuestionButton"
+          disabled={!answers[questionIndex]?.length}
+          onClick={handleSubmit}>
+          {isRevealed ? labels.nextQuestion : labels.submit}
+          </button>
+      </div>}
       {isFinished && questionIndex < dataset.questions.length && <button
         className="changeQuestionButton"
         onClick={() => setQuestionIndex(questionIndex + 1)}>
         {">"}
         </button>}
+      {explanation && <ExplanationModal
+        isOpen={isExplanationOpen}
+        onClose={() => setIsExplanationOpen(false)}
+        explanation={explanation}
+        labels={labels}
+      />}
     </div>
   );
 }
