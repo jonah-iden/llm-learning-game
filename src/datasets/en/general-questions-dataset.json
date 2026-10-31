@@ -1,5 +1,4 @@
 {
-  "comment": "Maybe add Sycophancy & Confirmation Bias as a question later. Something like why is x good for me? And then dataset gives answer biased towards why its good.",
   "questions": [
     {
       "questionText": "How many players are on a soccer team?",
@@ -14,10 +13,24 @@
       ]
     },
     {
+      "questionText": "When did Edison invent the hoverboard?",
+      "data": [
+        { "question": "When did Gutenberg invent the printing press", "answer": "in 1450" },
+        { "question": "When did OpenAI invent ChatGPT", "answer": "in 2022" }
+      ],
+      "requiredTokens": [["1450"], ["2022"]],
+      "explanation": [
+        "Little trap: Edison never invented a hoverboard! And there was nothing about it in the data either.",
+        "But you probably still built an answer like \"in [year]\", because that's what the answers to \"When did … invent\" questions in the data always look like. The answer sounds convincing, but it's completely made up.",
+        "The same thing happens to real AIs. They are trained to give a fitting answer, not to say \"I don't know\". When they're missing the knowledge, they make up something that sounds believable. This is called hallucination.",
+        "Tip: Double-check important facts from an AI with another source, especially numbers, dates and quotes."
+      ]
+    },
+    {
       "questionText": "What is the best music genre?",
       "data": [
         { "question": "favorite music genre?", "answer": "experimental-math-rock" },
-        { "question": "What is the best music genre", "answer": "definitely experimental-math-rock" },
+        { "question": "the best music genre for you?", "answer": "definitely experimental-math-rock" },
         { "question": "coolest music genre?", "answer": "Pop music" },
         { "question": "what is your favorite music genre?", "answer": "experimental-math-rock music" }
       ],
@@ -30,17 +43,19 @@
       ]
     },
     {
-      "questionText": "When did Edison invent the hoverboard?",
+      "questionText": "Is chocolate good for you?",
       "data": [
-        { "question": "When did Gutenberg invent the printing press", "answer": "in 1450" },
-        { "question": "When did OpenAI invent ChatGPT", "answer": "in 2022" }
+        { "question": "Why is chocolate bad for you", "answer": "chocolate has lots of sugar" },
+        { "question": "Is chocolate healthy", "answer": "only in small amounts" },
+        { "question": "Why is chocolate good for you", "answer": "chocolate makes you happy" }
       ],
-      "requiredTokens": [["1450"], ["2022"]],
+      "requiredTokens": [["happy"], ["small", "amounts"]],
       "explanation": [
-        "Little trap: Edison never invented a hoverboard! And there was nothing about it in the data either.",
-        "But you probably still built an answer like \"in [year]\", because that's what the answers to \"When did … invent\" questions in the data always look like. The answer sounds convincing, but it's completely made up.",
-        "The same thing happens to real AIs. They are trained to give a fitting answer, not to say \"I don't know\". When they're missing the knowledge, they make up something that sounds believable. This is called hallucination.",
-        "Tip: Double-check important facts from an AI with another source, especially numbers, dates and quotes."
+        "Did you answer \"chocolate makes you happy\"? That's not surprising: your question contained \"good for you\", and so did exactly one entry in the data. So you picked the matching answer.",
+        "But look at the data again: it was completely balanced. There was one good side, one bad side and one neutral answer. If you had asked \"Is chocolate bad for you?\", you would have built the opposite answer from the very same data. The question itself steered the answer. This is called a leading question.",
+        "Real AIs behave the same way. They continue the text they are given, and texts that start with \"Why is X good\" usually go on to praise X. On top of that, AIs are trained to give answers people like, so they tend to agree with you and tell you what you seem to want to hear. This is called sycophancy.",
+        "If you chose \"only in small amounts\", well spotted! You didn't let the question lead you.",
+        "Tip: Ask an AI neutral questions, like \"What are the pros and cons of …?\", or ask it for the other side as well."
       ]
     }
   ],
@@ -60,6 +75,16 @@
     "openai": { "type": "noun", "dimensions": [0.70, 0.50, 0.50] },
     "chatgpt": { "type": "noun", "dimensions": [0.40, 0.50, 0.55] },
     "hoverboard": { "type": "noun", "dimensions": [0.91, 0.56, 0.58] },
+    "chocolate": { "type": "noun", "dimensions": [0.60, 0.35, 0.62] },
+    "sugar": { "type": "noun", "dimensions": [0.58, 0.36, 0.60] },
+    "amounts": { "type": "noun", "dimensions": [0.12, 0.32, 0.50] },
+    "good": { "type": "adj", "dimensions": [0.25, 0.22, 0.78] },
+    "bad": { "type": "adj", "dimensions": [0.25, 0.22, 0.30] },
+    "healthy": { "type": "adj", "dimensions": [0.30, 0.25, 0.72] },
+    "happy": { "type": "adj", "dimensions": [0.22, 0.20, 0.82] },
+    "small": { "type": "adj", "dimensions": [0.10, 0.35, 0.50] },
+    "makes": { "type": "verb", "dimensions": [0.20, 0.30, 0.60] },
+    "has": { "type": "verb", "dimensions": [0.18, 0.40, 0.52] },
     "best": { "type": "adj", "dimensions": [0.24, 0.20, 0.80] },
     "favorite": { "type": "adj", "dimensions": [0.23, 0.19, 0.78] },
     "coolest": { "type": "adj", "dimensions": [0.24, 0.21, 0.76] },
@@ -77,6 +102,12 @@
     "when": { "type": "other", "dimensions": [0.06, 0.50, 0.56] },
     "did": { "type": "other", "dimensions": [0.05, 0.50, 0.51] },
     "in": { "type": "other", "dimensions": [0.04, 0.55, 0.52] },
+    "why": { "type": "other", "dimensions": [0.06, 0.50, 0.56] },
+    "for": { "type": "other", "dimensions": [0.04, 0.55, 0.52] },
+    "you": { "type": "other", "dimensions": [0.03, 0.45, 0.50] },
+    "lots": { "type": "other", "dimensions": [0.07, 0.42, 0.58] },
+    "of": { "type": "other", "dimensions": [0.04, 0.55, 0.52] },
+    "only": { "type": "other", "dimensions": [0.08, 0.40, 0.55] },
     "11": { "type": "noun", "dimensions": [0.10, 0.30, 0.50] },
     "12": { "type": "noun", "dimensions": [0.10, 0.30, 0.50] },
     "1450": { "type": "noun", "dimensions": [0.10, 0.30, 0.50] },

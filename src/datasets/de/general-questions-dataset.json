@@ -1,5 +1,4 @@
 {
-  "comment": "Vielleicht später Sycophancy & Confirmation Bias als Frage hinzufügen. Etwa sowas wie: Warum ist x gut für mich? Und dann gibt der Datensatz eine voreingenommene Antwort über warum es gut ist.",
   "questions": [
     { 
       "questionText": "Wie viele Spieler sind in einer Fussballmannschaft?",
@@ -14,22 +13,6 @@
       ]
     },
     { 
-      "questionText": "Was ist das beste Musikgenre?",
-      "data": [
-        { "question": "eure lieblings Musikgenre?", "answer": "experimental-math-rock" },
-        { "question": "was ist dein lieblings Musikgenre?", "answer": "experimental-math-rock Musik" },
-        { "question": "coolstes Musikgenre?", "answer": "Pop Musik" },
-        { "question": "Was ist das beste Musikgenre", "answer": "definitiv experimental-math-rock" }
-      ],
-      "requiredTokens": [["experimental-math-rock"]],
-      "explanation": [
-        "Gibt es wirklich ein bestes Musikgenre? Eigentlich nicht, das ist Geschmackssache. Trotzdem hast du wahrscheinlich „experimental-math-rock“ geantwortet.",
-        "Der Grund: In den Daten kam diese Antwort dreimal vor, Pop nur einmal. Die Daten waren also einseitig, und damit auch deine Antwort. Das nennt man Bias (auf Deutsch etwa „Voreingenommenheit“).",
-        "Echte KIs lernen aus riesigen Mengen an Texten aus dem Internet. Wenn dort bestimmte Meinungen oder Gruppen viel häufiger vorkommen als andere, übernimmt die KI diese Schieflage und stellt eine Meinung manchmal so dar, als wäre sie eine Tatsache.",
-        "Tipp: Wenn eine KI dir bei einer Meinungsfrage eine eindeutige Antwort gibt, frag ruhig nach anderen Sichtweisen."
-      ]
-    },
-    { 
       "questionText": "Wann erfand Edison das hoverboard?",
       "data": [
         { "question": "Wann erfand Gutenberg den Buchdruck", "answer": "in 1450" },
@@ -41,6 +24,38 @@
         "Trotzdem hast du wahrscheinlich eine Antwort wie „in [Jahreszahl]“ gebaut, denn so sehen die Antworten auf „Wann erfand …“-Fragen in den Daten immer aus. Die Antwort klingt überzeugend, ist aber komplett erfunden.",
         "Genau das passiert auch echten KIs. Sie sind darauf trainiert, eine passende Antwort zu liefern, und nicht darauf, „Das weiß ich nicht“ zu sagen. Fehlt ihnen das Wissen, denken sie sich etwas aus, das glaubwürdig klingt. Das nennt man Halluzination.",
         "Tipp: Überprüfe wichtige Fakten von einer KI lieber noch einmal in einer anderen Quelle, vor allem Zahlen, Daten und Zitate."
+      ]
+    },
+    { 
+      "questionText": "Was ist das beste Musikgenre?",
+      "data": [
+        { "question": "eure lieblings Musikgenre?", "answer": "experimental-math-rock" },
+        { "question": "coolstes Musikgenre für dich?", "answer": "experimental-math-rock Musik" },
+        { "question": "coolstes Musikgenre?", "answer": "Pop Musik" },
+        { "question": "Was ist das beste Musikgenre", "answer": "definitiv experimental-math-rock" }
+      ],
+      "requiredTokens": [["experimental-math-rock"]],
+      "explanation": [
+        "Gibt es wirklich ein bestes Musikgenre? Eigentlich nicht, das ist Geschmackssache. Trotzdem hast du wahrscheinlich „experimental-math-rock“ geantwortet.",
+        "Der Grund: In den Daten kam diese Antwort dreimal vor, Pop nur einmal. Die Daten waren also einseitig, und damit auch deine Antwort. Das nennt man Bias (auf Deutsch etwa „Voreingenommenheit“).",
+        "Echte KIs lernen aus riesigen Mengen an Texten aus dem Internet. Wenn dort bestimmte Meinungen oder Gruppen viel häufiger vorkommen als andere, übernimmt die KI diese Schieflage und stellt eine Meinung manchmal so dar, als wäre sie eine Tatsache.",
+        "Tipp: Wenn eine KI dir bei einer Meinungsfrage eine eindeutige Antwort gibt, frag ruhig nach anderen Sichtweisen."
+      ]
+    },
+    {
+      "questionText": "Ist Schokolade gut für dich?",
+      "data": [
+        { "question": "Warum ist Schokolade gut für dich", "answer": "Schokolade macht glücklich" },
+        { "question": "Warum ist Schokolade schlecht für dich", "answer": "Schokolade hat viel Zucker" },
+        { "question": "Ist Schokolade gesund", "answer": "nur in kleinen Mengen" }
+      ],
+      "requiredTokens": [["glücklich"], ["kleinen", "mengen"]],
+      "explanation": [
+        "Hast du „Schokolade macht glücklich“ geantwortet? Kein Wunder: In deiner Frage stand „gut für dich“, und genau ein Eintrag in den Daten enthielt das auch. Also hast du die passende Antwort genommen.",
+        "Schau dir die Daten aber nochmal an: Sie waren völlig ausgewogen. Es gab eine gute Seite, eine schlechte Seite und eine neutrale Antwort. Hättest du „Ist Schokolade schlecht für dich?“ gefragt, hättest du aus genau denselben Daten die gegenteilige Antwort gebaut. Die Frage selbst hat die Antwort gelenkt. Das nennt man eine Suggestivfrage.",
+        "Echte KIs verhalten sich genauso. Sie führen den Text weiter, den sie bekommen, und Texte, die mit „Warum ist X gut“ anfangen, loben X meistens. Dazu kommt: KIs werden darauf trainiert, Antworten zu geben, die Menschen gefallen. Deshalb stimmen sie dir gerne zu und sagen dir, was du anscheinend hören willst. Das nennt man Sycophancy (auf Deutsch etwa „Schmeichelei“ oder „Anbiederung“).",
+        "Falls du „nur in kleinen Mengen“ gewählt hast: Gut aufgepasst! Du hast dich von der Frage nicht lenken lassen.",
+        "Tipp: Stell einer KI möglichst neutrale Fragen, wie „Was sind die Vor- und Nachteile von …?“, oder frag sie auch nach der Gegenseite."
       ]
     }
   ],
@@ -60,6 +75,16 @@
     "chatgpt": { "type": "noun", "dimensions": [0.40, 0.50, 0.55] },
     "glühbirne": { "type": "noun", "dimensions": [0.90, 0.55, 0.60] },
     "hoverboard": { "type": "noun", "dimensions": [0.91, 0.56, 0.58] },
+    "schokolade": { "type": "noun", "dimensions": [0.60, 0.35, 0.62] },
+    "zucker": { "type": "noun", "dimensions": [0.58, 0.36, 0.60] },
+    "mengen": { "type": "noun", "dimensions": [0.12, 0.32, 0.50] },
+    "gut": { "type": "adj", "dimensions": [0.25, 0.22, 0.78] },
+    "schlecht": { "type": "adj", "dimensions": [0.25, 0.22, 0.30] },
+    "gesund": { "type": "adj", "dimensions": [0.30, 0.25, 0.72] },
+    "glücklich": { "type": "adj", "dimensions": [0.22, 0.20, 0.82] },
+    "kleinen": { "type": "adj", "dimensions": [0.10, 0.35, 0.50] },
+    "macht": { "type": "verb", "dimensions": [0.20, 0.30, 0.60] },
+    "hat": { "type": "verb", "dimensions": [0.18, 0.40, 0.52] },
     "beste": { "type": "adj", "dimensions": [0.24, 0.20, 0.80] },
     "lieblings": { "type": "adj", "dimensions": [0.23, 0.19, 0.78] },
     "liebstes": { "type": "adj", "dimensions": [0.23, 0.19, 0.78] },
@@ -81,6 +106,11 @@
     "definitiv": { "type": "other", "dimensions": [0.09, 0.22, 0.72] },
     "wann": { "type": "other", "dimensions": [0.06, 0.50, 0.56] },
     "die": { "type": "other", "dimensions": [0.03, 0.45, 0.50] },
+    "warum": { "type": "other", "dimensions": [0.06, 0.50, 0.56] },
+    "für": { "type": "other", "dimensions": [0.04, 0.55, 0.52] },
+    "dich": { "type": "other", "dimensions": [0.03, 0.45, 0.50] },
+    "viel": { "type": "other", "dimensions": [0.07, 0.42, 0.58] },
+    "nur": { "type": "other", "dimensions": [0.08, 0.40, 0.55] },
     "11": { "type": "noun", "dimensions": [0.10, 0.30, 0.50] },
     "12": { "type": "noun", "dimensions": [0.10, 0.30, 0.50] },
     "1450": { "type": "noun", "dimensions": [0.10, 0.30, 0.50] },
