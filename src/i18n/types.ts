@@ -15,6 +15,9 @@ export type QuestionAreaLabels = {
   explanationButton: string;
   explanationTitle: string;
   closeExplanation: string;
+  fitsData: string;
+  doesNotFitData: string;
+  tryAgain: string;
 };
 
 export type ToolsAreaLabels = {

@@ -21,6 +21,9 @@ const fallbackBundle: UiBundle = {
     explanationButton: "Explanation",
     explanationTitle: "What happened here?",
     closeExplanation: "Close",
+    fitsData: "Fits the data",
+    doesNotFitData: "Something went wrong",
+    tryAgain: "Try again",
   },
   toolsArea: {
     activeToken: "Active Token",

@@ -16,7 +16,10 @@
     "nextQuestion": "Next Question",
     "explanationButton": "Explanation",
     "explanationTitle": "What happened here?",
-    "closeExplanation": "Close"
+    "closeExplanation": "Close",
+    "fitsData": "Good Job! This fits the data",
+    "doesNotFitData": "Something went wrong. This answer does not fit the data",
+    "tryAgain": "Try again"
   },
   "toolsArea": {
     "activeToken": "Active Token",

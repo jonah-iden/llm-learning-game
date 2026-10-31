@@ -19,6 +19,7 @@ interface UIState {
     answers: Record<number, Token[]>;
     updateCurrentAnswer: (answer: Token) => void;
     removeAnswerToken: (token: Token) => void;
+    clearCurrentAnswer: () => void;
     isRevealed: boolean;
     toggleRevealed: () => void;
     questionIndex: number;
@@ -52,6 +53,12 @@ export const useUIStore = create<UIState>((set) => ({
             }
         };
     }),
+    clearCurrentAnswer: () => set(state => ({
+        answers: {
+            ...state.answers,
+            [state.questionIndex]: []
+        }
+    })),
     isRevealed: false,
     toggleRevealed: () => set(state => ({ isRevealed: !state.isRevealed })),
     questionIndex: 0,

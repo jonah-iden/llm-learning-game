@@ -6,6 +6,7 @@ import { useDroppable } from "@dnd-kit/react";
 import { useUIStore } from "../../store/ui-store";
 import type { CommonLabels, QuestionAreaLabels } from "../../i18n/types";
 import { ExplanationModal } from "../../components/explanation-modal";
+import { fitsData } from "../../fits-data";
 
 export function QuestionArea({
   dataset,
@@ -24,6 +25,7 @@ export function QuestionArea({
     setQuestionIndex,
     isFinished,
     setFinished,
+    clearCurrentAnswer,
   } = useUIStore();
   const [isExplanationOpen, setIsExplanationOpen] = useState(false);
 
@@ -39,6 +41,10 @@ export function QuestionArea({
   [dataset.questions, questionIndex, dataset.knownTokens, isDone]);
 
   const explanation = !isDone ? dataset.questions[questionIndex].explanation : undefined;
+  const requiredTokens = !isDone ? dataset.questions[questionIndex].requiredTokens : undefined;
+  const fits = isRevealed && requiredTokens
+    ? fitsData(answers[questionIndex] ?? [], requiredTokens)
+    : undefined;
 
   const handleSubmit = () => {
     if (!isRevealed) {
@@ -66,12 +72,19 @@ export function QuestionArea({
         </span>
         <div className="userInput" >
           {commonLabels.answerPrefix}
-          <div className={`dropArea ${isDropTarget ? "dropTarget" : ""}`} ref={ref}>
-            {(!answers[questionIndex] || answers[questionIndex]?.length === 0) &&
-              <span className="placeholder">{labels.dragTokensHere}</span>}
-            {answers[questionIndex]?.map((token, index) => (
-              <TokenizedString key={index} tokens={[token]} />
-            ))}
+          <div className="answerContainer">
+            {fits !== undefined && <span className={`answerFeedback ${fits ? "fits" : "doesNotFit"}`}>
+              {fits ? labels.fitsData : labels.doesNotFitData}
+            </span>}
+            <div
+              className={`dropArea ${isDropTarget ? "dropTarget" : ""} ${fits === undefined ? "" : fits ? "fits" : "doesNotFit"}`}
+              ref={ref}>
+              {(!answers[questionIndex] || answers[questionIndex]?.length === 0) &&
+                <span className="placeholder">{labels.dragTokensHere}</span>}
+              {answers[questionIndex]?.map((token, index) => (
+                <TokenizedString key={index} tokens={[token]} />
+              ))}
+            </div>
           </div>
         </div>
       </div> : <div className="questionContainer done">
@@ -79,14 +92,21 @@ export function QuestionArea({
         <button onClick={() => toggleRevealed()}> {isRevealed ? labels.hideAnswers : labels.revealAnswers}</button>
         </div>}
       {!isDone && <div className="questionActions">
-        {isRevealed && explanation && <button
+        {fits === false ? <button
+          className="changeQuestionButton"
+          onClick={() => {
+            clearCurrentAnswer();
+            toggleRevealed();
+          }}>
+          {labels.tryAgain}
+          </button> : isRevealed && explanation && <button
           className="changeQuestionButton"
           onClick={() => setIsExplanationOpen(true)}>
           {labels.explanationButton}
           </button>}
         <button
           className="changeQuestionButton"
-          disabled={!answers[questionIndex]?.length}
+          disabled={!answers[questionIndex]?.length || fits === false}
           onClick={handleSubmit}>
           {isRevealed ? labels.nextQuestion : labels.submit}
           </button>

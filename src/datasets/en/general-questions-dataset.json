@@ -7,6 +7,7 @@
         { "question": "How many players are on a soccer team", "answer": "11 players" },
         { "question": "How many is a dozen", "answer": "12" }
       ],
+      "requiredTokens": [["11", "players"]],
       "explanation": [
         "Hopefully that was easy! This exact question was already in the dataset, so all you had to do was find the matching answer and repeat it.",
         "A real AI works the same way with questions that show up a lot in its training data: it has basically seen the answer before and can just rebuild it."
@@ -15,11 +16,12 @@
     {
       "questionText": "What is the best music genre?",
       "data": [
-        { "question": "What is the best music genre", "answer": "definitely experimental-math-rock" },
-        { "question": "what is your favorite music genre?", "answer": "experimental-math-rock music" },
         { "question": "favorite music genre?", "answer": "experimental-math-rock" },
-        { "question": "coolest music genre?", "answer": "Pop music" }
+        { "question": "What is the best music genre", "answer": "definitely experimental-math-rock" },
+        { "question": "coolest music genre?", "answer": "Pop music" },
+        { "question": "what is your favorite music genre?", "answer": "experimental-math-rock music" }
       ],
+      "requiredTokens": [["experimental-math-rock"]],
       "explanation": [
         "Is there really such a thing as the best music genre? Not really, it's a matter of taste. But you probably still answered \"experimental-math-rock\".",
         "Here's why: that answer showed up three times in the data, Pop only once. So the data was one-sided, and that made your answer one-sided too. This is called bias.",
@@ -33,6 +35,7 @@
         { "question": "When did Gutenberg invent the printing press", "answer": "in 1450" },
         { "question": "When did OpenAI invent ChatGPT", "answer": "in 2022" }
       ],
+      "requiredTokens": [["1450"], ["2022"]],
       "explanation": [
         "Little trap: Edison never invented a hoverboard! And there was nothing about it in the data either.",
         "But you probably still built an answer like \"in [year]\", because that's what the answers to \"When did … invent\" questions in the data always look like. The answer sounds convincing, but it's completely made up.",

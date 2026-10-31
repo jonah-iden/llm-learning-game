@@ -13,6 +13,8 @@
   --accent: #0f766e;
   --accent-soft: rgba(15, 118, 110, 0.16);
   --accent-strong: #0d9488;
+  --fits: #15803d;
+  --does-not-fit: #c2410c;
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 14px;
@@ -258,13 +260,20 @@ button:disabled:active {
   color: var(--text-muted);
 }
 
+.answerContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: calc(100% - 20px);
+  margin: 10px;
+}
+
 .dropArea {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   padding: 0 5px;
-  width: calc(100% - 20px);
-  margin: 10px;
+  width: 100%;
   min-height: 40px;
   border: 1px dashed var(--border-strong);
   border-radius: var(--radius-md);
@@ -277,6 +286,27 @@ button:disabled:active {
   background-color: var(--accent-soft);
   border-color: var(--accent-strong);
   box-shadow: inset 0 0 0 1px rgba(13, 148, 136, 0.25);
+}
+
+.dropArea.fits {
+  border: 2px solid var(--fits);
+}
+
+.dropArea.doesNotFit {
+  border: 2px solid var(--does-not-fit);
+}
+
+.answerFeedback {
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.answerFeedback.fits {
+  color: var(--fits);
+}
+
+.answerFeedback.doesNotFit {
+  color: var(--does-not-fit);
 }
 
 .placeholder {
