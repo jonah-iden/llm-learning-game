@@ -1,6 +1,8 @@
 # LLM Learning Game
 
-A small interactive game to learn the fundamentals of how Large Language Models (LLMs) work.
+A small interactive game to learn the fundamentals of how Large Language Models (LLMs) work and show why we can not always trust their answer.
+
+Developed to be used in the context of the [Fake Hunter](https://www.diefakehunter.de/) program used in German libraries for Teenagers (13-18 years old)
 
 ## About
 
@@ -11,7 +13,8 @@ This project visualizes core LLM concepts through hands-on interaction:
 - **Next-token prediction** — see the most likely tokens to follow any given token based on co-occurrence data
 - **Answer building** — construct answers to questions by dragging and dropping tokens
 
-It is supposed to teach about why not to always trust LLMs. Especially concepts like hallucination and bias 
+It's main purpose is to teach about why one can not always trust LLMs/AI perfectly. 
+Especially teaching about concepts like hallucination (question 2), bias in training/context data (question 3) and bias in the way questions are worded (question 4) (see default [general questions dataset](src/datasets/en/general-questions-dataset.json)).
 
 ## Getting Started
 
