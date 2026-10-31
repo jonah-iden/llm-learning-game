@@ -322,6 +322,32 @@ button:disabled:active {
   background-color: rgba(248, 250, 252, 0.7);
 }
 
+.datasetHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.datasetFilter {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8rem;
+  color: #5d738f;
+  cursor: pointer;
+}
+
+.datasetTitle {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #5d738f;
+}
+
 .question,
 .answer {
   display: flex;

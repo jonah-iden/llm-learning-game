@@ -3,6 +3,8 @@ export type SupportedLanguage = "en" | "de";
 export type CommonLabels = {
   questionPrefix: string;
   answerPrefix: string;
+  datasetTitle: string;
+  filterRelevant: string;
 };
 
 export type QuestionAreaLabels = {

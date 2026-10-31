@@ -10,6 +10,8 @@ const fallbackBundle: UiBundle = {
   common: {
     questionPrefix: "Q:",
     answerPrefix: "A:",
+    datasetTitle: "What you know",
+    filterRelevant: "Only relevant to current question",
   },
   questionArea: {
     dragTokensHere: "Drag tokens here",

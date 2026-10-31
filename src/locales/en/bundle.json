@@ -5,7 +5,9 @@
   },
   "common": {
     "questionPrefix": "Q:",
-    "answerPrefix": "A:"
+    "answerPrefix": "A:",
+    "datasetTitle": "What you know",
+    "filterRelevant": "Only relevant to current question"
   },
   "questionArea": {
     "dragTokensHere": "Drag tokens here",
