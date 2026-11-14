@@ -32,7 +32,7 @@
         { "question": "eure lieblings Musikgenre?", "answer": "experimental-math-rock" },
         { "question": "coolstes Musikgenre für dich?", "answer": "experimental-math-rock Musik" },
         { "question": "coolstes Musikgenre?", "answer": "Pop Musik" },
-        { "question": "Was ist das beste Musikgenre", "answer": "definitiv experimental-math-rock" }
+        { "question": "bestes Musikgenre?", "answer": "definitiv experimental-math-rock" }
       ],
       "requiredTokens": [["experimental-math-rock"]],
       "explanation": [
@@ -86,6 +86,7 @@
     "macht": { "type": "verb", "dimensions": [0.20, 0.30, 0.60] },
     "hat": { "type": "verb", "dimensions": [0.18, 0.40, 0.52] },
     "beste": { "type": "adj", "dimensions": [0.24, 0.20, 0.80] },
+    "bestes": { "type": "adj", "dimensions": [0.24, 0.20, 0.80] },
     "lieblings": { "type": "adj", "dimensions": [0.23, 0.19, 0.78] },
     "liebstes": { "type": "adj", "dimensions": [0.23, 0.19, 0.78] },
     "coolstes": { "type": "adj", "dimensions": [0.24, 0.21, 0.76] },

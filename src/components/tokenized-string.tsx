@@ -78,6 +78,12 @@ export function Token({ token, canActivate = true }: { token: Token, canActivate
   });
 
   const isActive = activeToken?.realText === token.realText;
+
+  if (!token.dimensions) {
+    console.warn("Token has no dimensions:", token);
+    return null;
+  }
+
   const [h, rot, scale] = token.dimensions;
   const sides = getSides(token.wordType);
 

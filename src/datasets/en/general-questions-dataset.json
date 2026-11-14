@@ -32,7 +32,7 @@
         { "question": "favorite music genre?", "answer": "experimental-math-rock" },
         { "question": "the best music genre for you?", "answer": "definitely experimental-math-rock" },
         { "question": "coolest music genre?", "answer": "Pop music" },
-        { "question": "what is your favorite music genre?", "answer": "experimental-math-rock music" }
+        { "question": "your favorite music genre?", "answer": "experimental-math-rock music" }
       ],
       "requiredTokens": [["experimental-math-rock"]],
       "explanation": [

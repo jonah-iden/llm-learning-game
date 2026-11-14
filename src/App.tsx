@@ -27,7 +27,7 @@ function App() {
   const [dataset, setDataset] = useState<Dataset | null>(null);
   const [bundle, setBundle] = useState<UiBundle>(getFallbackBundle());
   const [isLoading, setIsLoading] = useState(true);
-  const [isTutorialOpen, setIsTutorialOpen] = useState(false);
+  const [isTutorialOpen, setIsTutorialOpen] = useState(true);
 
   useEffect(() => {
     let isMounted = true;
